@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.restaurante.presencion.Cliente.login;
+package com.restaurante.presentacion.Cliente.login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
