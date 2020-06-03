@@ -10,12 +10,22 @@ public class Adicionales {
    private String nombre;
    private boolean tipo;// true is multiple  y false is single 
    private List<Adicional> listAdicionales;
+   private int plato;
 
-    public Adicionales(int id, String nombre, boolean tipo, List<Adicional> listAdicionales) {
+    public Adicionales(int id, String nombre, boolean tipo, List<Adicional> listAdicionales, int plato) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
         this.listAdicionales = listAdicionales;
+        this.plato = plato;
+    }
+
+    public int getPlato() {
+        return plato;
+    }
+
+    public void setPlato(int plato) {
+        this.plato = plato;
     }
 
      public Adicionales() {
@@ -56,6 +66,12 @@ public class Adicionales {
 
     public void setListAdicionales(List<Adicional> listAdicionales) {
         this.listAdicionales = listAdicionales;
+    }
+
+
+    public int toTipo() {
+         if(tipo) return 1;
+        return 0;
     }
 
    

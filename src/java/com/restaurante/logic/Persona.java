@@ -7,13 +7,15 @@ public class Persona {
  private String correo;
  private String contraseña;
  private String telefono;
+ private boolean isAdmin;
 
-    public Persona(String nombre, String apellidos, String correo, String contraseña, String telefono) {
+    public Persona(String nombre, String apellidos, String correo, String contraseña, String telefono,boolean isAdmin) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.correo = correo;
         this.contraseña = contraseña;
         this.telefono = telefono;
+        this.isAdmin = isAdmin;
     }
      public Persona() {
         this.nombre = "";
@@ -21,6 +23,15 @@ public class Persona {
         this.correo = "";
         this.contraseña = "";
         this.telefono = "";
+        this.isAdmin = false;
+    }
+
+    public boolean isIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     public String getNombre() {
@@ -61,6 +72,15 @@ public class Persona {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String toStringNcompleto() {
+        return nombre+" "+apellidos;
+    }
+    
+    public int toIsAdmin() {
+        if(isAdmin) return 1;
+        return 0;
     }
  
  
