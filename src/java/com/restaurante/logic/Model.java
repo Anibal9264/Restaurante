@@ -37,6 +37,14 @@ public class Model {
           return new ArrayList();
       }
     }
+
+    public List<Adicionales> getAdicionales(int id) {
+    try {
+          return base.ListaAdicionales(id);
+      } catch (Exception ex) {
+          return new ArrayList();
+      }
+    }
     
   
     

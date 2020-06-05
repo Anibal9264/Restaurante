@@ -1,0 +1,44 @@
+<div class="modal-dialog" style="width:50%">
+ <div class="modal-content">
+ <form id="formulario">
+    <div class="modal-content">
+              <div class="modal-top">
+          <img class="img-fluid" id="Dimg">
+        </div>
+      
+      <div class="modal-body">
+        <h4 id="Dnombre"></h4>
+        <p class="text-muted" id="Ddetalle"></p>
+        <div id="menu-options" class="menu-options" data-control="item-options">
+       
+        </div>
+
+        <div class="menu-comment">
+          <textarea name="comment" class="form-control" rows="2" placeholder="Add Comment"></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="row no-gutters w-100">
+          <div class="col-sm-5 pb-3 pb-sm-0">
+            <div class="input-group" data-cart-toggle="quantity">
+              <div class="input-group-prepend">
+               <button class="btn btn-light" id="menos" type="button">-</button>
+              </div>
+              <input type="number" id="cantidad" class="form-control text-center" value="1">
+              <div class="input-group-append">
+                <button class="btn btn-light" id="mas" type="button">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-7 pl-sm-2">
+            <button type="submit" class="btn btn-primary btn-block" data-attach-loading="">
+              Agregar<span id="totalP" class="pull-right"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div>

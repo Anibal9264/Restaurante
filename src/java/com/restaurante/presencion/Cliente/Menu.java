@@ -1,6 +1,7 @@
 
 package com.restaurante.presencion.Cliente;
 
+import com.restaurante.logic.Adicionales;
 import com.restaurante.logic.Model;
 import com.restaurante.logic.Plato;
 import java.util.List;
@@ -18,4 +19,11 @@ public class Menu {
    public List<Plato> list(@QueryParam("id") String id) {  
       return Model.instance().getPlatos(Integer.parseInt(id));
    }
+   
+//   @GET
+//   @Produces({MediaType.APPLICATION_JSON})
+//   public List<Adicionales> listA(@QueryParam("idP") int id) {  
+//      return Model.instance().getAdicionales(id);
+//   }
+   
 }

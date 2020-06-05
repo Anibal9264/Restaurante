@@ -2,7 +2,8 @@
 //window.Categoria
 
  // al Cargar la pagina completa
- function loaded(){	
+ function loaded(){
+    $('#add-modal').load("detalles.html");
     GetCategorias();
  }
 $(loaded);
@@ -14,7 +15,7 @@ $(loaded);
    }
    
   function listCat(Categorias){
-    var cat = $("#categorias");
+    var cat = $('#categorias');
     Categorias.forEach( (c)=>{CategoriasAdd(cat,c);});	
   }
   
