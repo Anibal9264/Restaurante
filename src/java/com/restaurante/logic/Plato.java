@@ -14,8 +14,10 @@ public class Plato {
     private String imagen;
     private List<Adicionales> adicionales;
     private int cantidad;
+    private int Categoria_id;
+    private int Orden_id;
 
-    public Plato(int id, String nombre, String detalle, Double precio, int disponibles, String imagen, List<Adicionales> adicionales, int cantidad) {
+    public Plato(int id, String nombre, String detalle, Double precio, int disponibles, String imagen, List<Adicionales> adicionales, int cantidad, int Categoria_id, int Orden_id) {
         this.id = id;
         this.nombre = nombre;
         this.detalle = detalle;
@@ -24,7 +26,12 @@ public class Plato {
         this.imagen = imagen;
         this.adicionales = adicionales;
         this.cantidad = cantidad;
+        this.Categoria_id = Categoria_id;
+        this.Orden_id = Orden_id;
     }
+
+   
+   
 
     
 
@@ -37,8 +44,28 @@ public class Plato {
         this.imagen = "";
         this.adicionales = new ArrayList();
         this.cantidad = 1;
+        this.Categoria_id = 1;
+        this.Orden_id = 1;
     }
 
+    public int getCategoria_id() {
+        return Categoria_id;
+    }
+
+    public void setCategoria_id(int Categoria_id) {
+        this.Categoria_id = Categoria_id;
+    }
+
+    public int getOrden_id() {
+        return Orden_id;
+    }
+
+    public void setOrden_id(int Orden_id) {
+        this.Orden_id = Orden_id;
+    }
+
+    
+    
     public int getId() {
         return id;
     }

@@ -7,20 +7,20 @@ import java.util.List;
 
 public class Orden {
    private int id;
-   private Cliente cliente;
-   private List<Plato> platos;
    private Double total;
-   private  boolean metodo; // true es entrega y false es recoje
+   private boolean Entrega_recoge; // true es entrega y false es recoje
    private String fecha;
-   private Direccion direccion;
    private int estado; // 1 : recivida o enviada 2: Preparacion 3: Lista
-
-    public Orden(int id, Cliente cliente, List<Plato> platos, Double total, boolean metodo, String fecha, Direccion direccion, int estado) {
+   private Cliente cliente;
+   private Direccion direccion;
+   private List<Plato> platos;
+ 
+    public Orden(int id, Cliente cliente, List<Plato> platos, Double total, boolean Entrega_recoge, String fecha, Direccion direccion, int estado) {
         this.id = id;
         this.cliente = cliente;
         this.platos = platos;
         this.total = total;
-        this.metodo = metodo;
+        this.Entrega_recoge = Entrega_recoge;
         this.fecha = fecha;
         this.direccion = direccion;
         this.estado = estado;
@@ -31,7 +31,7 @@ public class Orden {
         this.cliente = new Cliente();
         this.platos = new ArrayList();
         this.total = 0.0;
-        this.metodo = false;
+        this.Entrega_recoge = false;
         this.fecha = "";
         this.direccion = new Direccion();
         this.estado = 0;
@@ -69,12 +69,12 @@ public class Orden {
         this.total = total;
     }
 
-    public boolean isMetodo() {
-        return metodo;
+    public boolean isEntrega_recoge() {
+        return Entrega_recoge;
     }
 
-    public void setMetodo(boolean metodo) {
-        this.metodo = metodo;
+    public void setEntrega_recoge(boolean metodo) {
+        this.Entrega_recoge = metodo;
     }
 
     public String getFecha() {
@@ -101,6 +101,10 @@ public class Orden {
         this.estado = estado;
     }
 
-    
+     public int toEntregaRecoge() {
+         if(Entrega_recoge) return 1;
+        return 0;
+    }
+
 
 }

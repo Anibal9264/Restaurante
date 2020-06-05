@@ -11,7 +11,7 @@ import java.sql.Statement;
 import java.util.Properties;
 
 public class RelDatabase {
-    public static final String PROPERTIES_FILE_NAME="/BancoUNA.properties";        
+    public static final String PROPERTIES_FILE_NAME="/Restaurante.properties";        
     Connection cnx;
     public RelDatabase(){
         cnx=this.getConnection();            

@@ -8,10 +8,11 @@ import java.util.List;
 public class Cliente extends Persona {
   private List<Direccion> direcciones; 
 
-    public Cliente(String nombre, String apellidos, String correo, String contraseña, String telefono, List direcciones) {
-        super(nombre, apellidos, correo, contraseña, telefono);
+    public Cliente(List<Direccion> direcciones, String nombre, String apellidos, String correo, String contraseña, String telefono, boolean isAdmin) {
+        super(nombre, apellidos, correo, contraseña, telefono, isAdmin);
         this.direcciones = direcciones;
     }
+
 
     public Cliente() {
         super();
