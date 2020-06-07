@@ -2,4 +2,14 @@
     overflow:hidden;
 }
 
+.list-group{
+  height: 300px;
+  overflow: auto;
+}
+.panel{
+    height: 400px;
+}
 
+.btn2{
+    padding: 1px;
+}

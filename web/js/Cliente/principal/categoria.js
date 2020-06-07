@@ -4,6 +4,7 @@
  // al Cargar la pagina completa
  function loaded(){
     $('#add-modal').load("detalles.html");
+    $('#add-modal2').load("Direcciones.html");
     GetCategorias();
  }
 $(loaded);
@@ -20,8 +21,8 @@ $(loaded);
   }
   
   function CategoriasAdd(cat,categoria){
-    var a = $("<a>");
-    a.addClass("list-group-item w3-bar-item w3-button");
+    var a = $("<label>");
+    a.addClass("btn btn-secondary");
     a.html(categoria.nombre);
     a.on("click",()=>{GetListPlatos(categoria.id);});
     cat.append(a); 

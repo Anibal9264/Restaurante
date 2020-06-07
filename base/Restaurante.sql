@@ -15,6 +15,17 @@ CREATE SCHEMA IF NOT EXISTS `Restaurante` DEFAULT CHARACTER SET utf8 ;
 USE `Restaurante` ;
 
 -- -----------------------------------------------------
+-- Table `Restaurante`.`Adicional`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Restaurante`.`Adicional` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `detalle` VARCHAR(45) NULL,
+  `precio` DOUBLE NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `Restaurante`.`Adicionales`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Restaurante`.`Adicionales` (
@@ -26,33 +37,15 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Restaurante`.`Adicional`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Restaurante`.`Adicional` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `detalle` VARCHAR(45) NULL,
-  `precio` DOUBLE NULL,
-  `Adicionales_id` INT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_Adicional_Adicionales_idx` (`Adicionales_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Adicional_Adicionales`
-    FOREIGN KEY (`Adicionales_id`)
-    REFERENCES `Restaurante`.`Adicionales` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `Restaurante`.`Plato`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Restaurante`.`Plato` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
-  `detalle` VARCHAR(45) NULL,
+  `detalle` VARCHAR(100) NULL,
   `precio` DOUBLE NULL,
   `disponibles` INT NULL,
-  `imagen` VARCHAR(45) NULL,
+  `imagen` VARCHAR(100) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -89,12 +82,12 @@ CREATE TABLE IF NOT EXISTS `Restaurante`.`Direccion` (
   `provincia` VARCHAR(45) NULL,
   `canton` VARCHAR(45) NULL,
   `distrito` VARCHAR(45) NULL,
-  `exacta` VARCHAR(45) NULL,
-  `Persona_correo` VARCHAR(45) NOT NULL,
+  `exacta` VARCHAR(100) NULL,
+  `Persona` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Direccion_Persona1_idx` (`Persona_correo` ASC) VISIBLE,
+  INDEX `fk_Direccion_Persona1_idx` (`Persona` ASC) VISIBLE,
   CONSTRAINT `fk_Direccion_Persona1`
-    FOREIGN KEY (`Persona_correo`)
+    FOREIGN KEY (`Persona`)
     REFERENCES `Restaurante`.`Persona` (`correo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -110,18 +103,18 @@ CREATE TABLE IF NOT EXISTS `Restaurante`.`Orden` (
   `entrega_recoge` TINYINT NULL,
   `fecha` DATETIME NULL DEFAULT "1999-01-01 01:00:00",
   `estado` INT NULL,
-  `Persona_correo` VARCHAR(45) NOT NULL,
-  `Direccion_id` INT NOT NULL,
+  `Persona` VARCHAR(45) NOT NULL,
+  `Direccion` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Orden_Persona1_idx` (`Persona_correo` ASC) VISIBLE,
-  INDEX `fk_Orden_Direccion1_idx` (`Direccion_id` ASC) VISIBLE,
+  INDEX `fk_Orden_Persona1_idx` (`Persona` ASC) VISIBLE,
+  INDEX `fk_Orden_Direccion1_idx` (`Direccion` ASC) VISIBLE,
   CONSTRAINT `fk_Orden_Persona1`
-    FOREIGN KEY (`Persona_correo`)
+    FOREIGN KEY (`Persona`)
     REFERENCES `Restaurante`.`Persona` (`correo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Orden_Direccion1`
-    FOREIGN KEY (`Direccion_id`)
+    FOREIGN KEY (`Direccion`)
     REFERENCES `Restaurante`.`Direccion` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -132,18 +125,18 @@ ENGINE = InnoDB;
 -- Table `Restaurante`.`Plato_Adicionales`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Restaurante`.`Plato_Adicionales` (
-  `Plato_id` INT NOT NULL,
-  `Adicionales_id` INT NOT NULL,
-  PRIMARY KEY (`Plato_id`, `Adicionales_id`),
-  INDEX `fk_Plato_has_Adicionales_Adicionales1_idx` (`Adicionales_id` ASC) VISIBLE,
-  INDEX `fk_Plato_has_Adicionales_Plato1_idx` (`Plato_id` ASC) VISIBLE,
+  `Plato` INT NOT NULL,
+  `Adicionales` INT NOT NULL,
+  PRIMARY KEY (`Plato`, `Adicionales`),
+  INDEX `fk_Plato_has_Adicionales_Adicionales1_idx` (`Adicionales` ASC) VISIBLE,
+  INDEX `fk_Plato_has_Adicionales_Plato1_idx` (`Plato` ASC) VISIBLE,
   CONSTRAINT `fk_Plato_has_Adicionales_Plato1`
-    FOREIGN KEY (`Plato_id`)
+    FOREIGN KEY (`Plato`)
     REFERENCES `Restaurante`.`Plato` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Plato_has_Adicionales_Adicionales1`
-    FOREIGN KEY (`Adicionales_id`)
+    FOREIGN KEY (`Adicionales`)
     REFERENCES `Restaurante`.`Adicionales` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -154,18 +147,18 @@ ENGINE = InnoDB;
 -- Table `Restaurante`.`Categoria_Plato`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Restaurante`.`Categoria_Plato` (
-  `Categoria_id` INT NOT NULL,
-  `Plato_id` INT NOT NULL,
-  PRIMARY KEY (`Categoria_id`, `Plato_id`),
-  INDEX `fk_Categoria_has_Plato_Plato1_idx` (`Plato_id` ASC) VISIBLE,
-  INDEX `fk_Categoria_has_Plato_Categoria1_idx` (`Categoria_id` ASC) VISIBLE,
+  `Categoria` INT NOT NULL,
+  `Plato` INT NOT NULL,
+  PRIMARY KEY (`Categoria`, `Plato`),
+  INDEX `fk_Categoria_has_Plato_Plato1_idx` (`Plato` ASC) VISIBLE,
+  INDEX `fk_Categoria_has_Plato_Categoria1_idx` (`Categoria` ASC) VISIBLE,
   CONSTRAINT `fk_Categoria_has_Plato_Categoria1`
-    FOREIGN KEY (`Categoria_id`)
+    FOREIGN KEY (`Categoria`)
     REFERENCES `Restaurante`.`Categoria` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Categoria_has_Plato_Plato1`
-    FOREIGN KEY (`Plato_id`)
+    FOREIGN KEY (`Plato`)
     REFERENCES `Restaurante`.`Plato` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -176,20 +169,43 @@ ENGINE = InnoDB;
 -- Table `Restaurante`.`Orden_Plato`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Restaurante`.`Orden_Plato` (
-  `Orden_id` INT NOT NULL,
-  `Plato_id` INT NOT NULL,
+  `Orden` INT NOT NULL,
+  `Plato` INT NOT NULL,
   `cantidad` INT NULL DEFAULT 1,
-  PRIMARY KEY (`Orden_id`, `Plato_id`),
-  INDEX `fk_Orden_has_Plato_Plato1_idx` (`Plato_id` ASC) VISIBLE,
-  INDEX `fk_Orden_has_Plato_Orden1_idx` (`Orden_id` ASC) VISIBLE,
+  `Detalle` VARCHAR(100) NULL DEFAULT 'No',
+  PRIMARY KEY (`Orden`, `Plato`),
+  INDEX `fk_Orden_has_Plato_Plato1_idx` (`Plato` ASC) VISIBLE,
+  INDEX `fk_Orden_has_Plato_Orden1_idx` (`Orden` ASC) VISIBLE,
   CONSTRAINT `fk_Orden_has_Plato_Orden1`
-    FOREIGN KEY (`Orden_id`)
+    FOREIGN KEY (`Orden`)
     REFERENCES `Restaurante`.`Orden` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Orden_has_Plato_Plato1`
-    FOREIGN KEY (`Plato_id`)
+    FOREIGN KEY (`Plato`)
     REFERENCES `Restaurante`.`Plato` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Restaurante`.`Adicionales_has_Adicional`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Restaurante`.`Adicionales_has_Adicional` (
+  `Adicionales` INT NOT NULL,
+  `Adicional` INT NOT NULL,
+  PRIMARY KEY (`Adicionales`, `Adicional`),
+  INDEX `fk_Adicionales_has_Adicional_Adicional1_idx` (`Adicional` ASC) VISIBLE,
+  INDEX `fk_Adicionales_has_Adicional_Adicionales1_idx` (`Adicionales` ASC) VISIBLE,
+  CONSTRAINT `fk_Adicionales_has_Adicional_Adicionales1`
+    FOREIGN KEY (`Adicionales`)
+    REFERENCES `Restaurante`.`Adicionales` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Adicionales_has_Adicional_Adicional1`
+    FOREIGN KEY (`Adicional`)
+    REFERENCES `Restaurante`.`Adicional` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
