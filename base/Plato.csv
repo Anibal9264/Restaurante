@@ -1,0 +1,6 @@
+"id";"nombre";"detalle";"precio";"disponibles";"imagen"
+1;"Gallopinto";"Tradicional Gallopinto De Costa Rica ";3400.0;1;"/Restaurante/recursos/Desayunos/Gallopinto.jpg"
+2;"Americano";"Tocineta,Huevo,Tostadas";4000.0;1;"/Restaurante/recursos/Desayunos/Americano.jpg"
+3;"Plato De Frutas";"Frutas de la temporada";5000.0;1;"/Restaurante/recursos/Desayunos/PlatoFrutas.jpg"
+4;"Tostadas";"Distintas Opcciones de Tostadas";3000.0;1;"/Restaurante/recursos/Desayunos/Tostadas.jpg"
+5;"Arroz con pollo";"Tradicional Arroz con pollo con especies de la casa y un sabor unico";4995.0;1;"/Restaurante/recursos/Arroces/ArrozConPollo.jpg"

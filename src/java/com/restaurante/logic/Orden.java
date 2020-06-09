@@ -13,9 +13,9 @@ public class Orden {
    private int estado; // 1 : recivida o enviada 2: Preparacion 3: Lista
    private Cliente cliente;
    private Direccion direccion;
-   private List<Plato> platos;
+   private List<Orden_Plato> platos;
  
-    public Orden(int id, Cliente cliente, List<Plato> platos, Double total, boolean Entrega_recoge, String fecha, Direccion direccion, int estado) {
+    public Orden(int id, Cliente cliente, List<Orden_Plato> platos, Double total, boolean Entrega_recoge, String fecha, Direccion direccion, int estado) {
         this.id = id;
         this.cliente = cliente;
         this.platos = platos;
@@ -53,11 +53,11 @@ public class Orden {
         this.cliente = cliente;
     }
 
-    public List<Plato> getPlatos() {
+    public List<Orden_Plato> getPlatos() {
         return platos;
     }
 
-    public void setPlatos(List<Plato> platos) {
+    public void setPlatos(List<Orden_Plato> platos) {
         this.platos = platos;
     }
 

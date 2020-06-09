@@ -7,6 +7,7 @@ import com.restaurante.logic.Categoria;
 import com.restaurante.logic.Cliente;
 import com.restaurante.logic.Direccion;
 import com.restaurante.logic.Orden;
+import com.restaurante.logic.Orden_Plato;
 import com.restaurante.logic.Persona;
 import com.restaurante.logic.Plato;
 import java.sql.ResultSet;
@@ -36,9 +37,9 @@ public class Dao {
      }
     
      public void AdicionalAdd(Adicional a) throws Exception{
-        String sql="insert into Adicional (detalle,precio,Adicionales_id)"+
+        String sql="insert into Adicional (detalle,precio)"+
          " values('%s','%s','%s')";
-        sql=String.format(sql,a.getDetalle(),a.getPrecio(),a.getAdicionalesID());
+        sql=String.format(sql,a.getDetalle(),a.getPrecio());
         int count=db.executeUpdate(sql);
         if (count==0){
             throw new Exception("Adicional ya existe");
@@ -57,9 +58,9 @@ public class Dao {
       
        public void PlatoAdd(Plato p) throws Exception{
         String sql="insert into Plato (nombre,detalle,precio,disponibles,"
-                + "imagen,cantidad) values('%s','%s','%s','%s','%s','%s')";
+                + "imagen) values('%s','%s','%s','%s','%s')";
         sql=String.format(sql,p.getNombre(),p.getDetalle(),p.getPrecio(),
-                p.getDisponibles(),p.getImagen(),p.getCantidad());
+                p.getDisponibles(),p.getImagen());
         int count=db.executeUpdate(sql);
         if (count==0){
             throw new Exception("Plato ya existe");
@@ -77,8 +78,8 @@ public class Dao {
      }
         
      public void OrdenAdd(Orden o) throws Exception{
-        String sql="insert into Orden (total,entraga/recoge,fecha,estado,"
-                 + "Persona_correo,Direccion_id)"+
+        String sql="insert into Orden (total,entraga_recoge,fecha,estado,"
+                 + "Persona,Direccion)"+
          " values('%s')";
         sql=String.format(sql,o.getTotal(),o.toEntregaRecoge(),o.getFecha(),
                 o.getEstado(),o.getCliente().getCorreo(),o.getDireccion().getId());
@@ -90,7 +91,7 @@ public class Dao {
      
       public void DireccionAdd(Direccion d) throws Exception{
         String sql="insert into Direccion (provincia,canton,distrito,exacta,"
-                 + "Persona_correo)"+
+                 + "Persona)"+
          " values('%s','%s','%s','%s','%s')";
         sql=String.format(sql,d.getProvincia(),d.getCanton(),d.getDistrito(),
                 d.getExacta(),d.getPersona_correo());
@@ -113,12 +114,24 @@ public class Dao {
         }
     }
     
-    public Adicionales getAdicionales(int Adicionales_id) throws Exception {
+    public Adicionales getAdicionales(int id) throws Exception {
      String sql="select * from Adicionales where id like '%%%s%%'";
-        sql = String.format(sql,Adicionales_id);
+        sql = String.format(sql,id);
         ResultSet rs =  db.executeQuery(sql);
         if (rs.next()) {
             return AdicionalesRender(rs);
+        }
+        else{
+            return null;   
+        }
+    }
+    
+     public Adicional getAdicional(int id) throws Exception {
+     String sql="select * from Adicional where id like '%%%s%%'";
+        sql = String.format(sql,id);
+        ResultSet rs =  db.executeQuery(sql);
+        if (rs.next()) {
+            return AdicionalRender(rs);
         }
         else{
             return null;   
@@ -153,15 +166,15 @@ public class Dao {
       
     //**************************GETS Listas********************************
     
-    public List<Adicional> ListaAdicional(int Adicionales_id){
+    public List<Adicional> ListaAdicional(int id) throws Exception{
         List<Adicional> resultado = new ArrayList<Adicional>();
         try {
-            String sql="select * from Adicional "+
-                    "where Adicionales_id like '%%%s%%'";
-            sql=String.format(sql,Adicionales_id);
+            String sql="select * from Adicionales_Adicional "+
+                    "where Adicionales like '%%%s%%'";
+            sql=String.format(sql,id);
             ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
-                resultado.add(AdicionalRender(rs));
+                resultado.add(getAdicional(rs.getInt("Adicional")));
             }
         } catch (SQLException ex) {
         return resultado;
@@ -169,15 +182,15 @@ public class Dao {
         return resultado;
     }
     
-        public List<Adicionales> ListaAdicionales(int Plato_id) throws Exception{
+        public List<Adicionales>ListaAdicionales(int Plato_id) throws Exception{
         List<Adicionales> resultado = new ArrayList<Adicionales>();
         try {
             String sql="select * from Plato_Adicionales "+
-                    "where Plato_id like '%%%s%%'";
+                    "where Plato like '%%%s%%'";
             sql=String.format(sql,Plato_id);
             ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
-            resultado.add(getAdicionales(rs.getInt("Adicionales_id")));
+            resultado.add(getAdicionales(rs.getInt("Adicionales")));
             }
         } catch (SQLException ex) {
         return resultado;
@@ -189,11 +202,11 @@ public class Dao {
         List<Plato> resultado = new ArrayList<Plato>();
         try {
             String sql="select * from Categoria_Plato "+
-                    "where Categoria_id like '%%%s%%'";
+                    "where Categoria like '%%%s%%'";
             sql=String.format(sql,Categoria_id);
             ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
-            resultado.add(getPlato(rs.getInt("Plato_id")));
+            resultado.add(getPlato(rs.getInt("Plato")));
             }
         } catch (SQLException ex) {
         return resultado;
@@ -201,21 +214,7 @@ public class Dao {
         return resultado;
     }
     
-     public List<Plato> ListaPlatoxOrden(int Orden_id) throws Exception{
-        List<Plato> resultado = new ArrayList<Plato>();
-        try {
-            String sql="select * from Orden_Plato "+
-                    "where Orden_id like '%%%s%%'";
-            sql=String.format(sql,Orden_id);
-            ResultSet rs =  db.executeQuery(sql);
-            while (rs.next()) {
-            resultado.add(getPlato(rs.getInt("Plato_id")));
-            }
-        } catch (SQLException ex) {
-        return resultado;
-        }
-        return resultado;
-    }
+ 
       
     public List<Categoria> ListaCategoria() throws Exception{
         List<Categoria> resultado = new ArrayList<Categoria>();
@@ -230,8 +229,40 @@ public class Dao {
         }
         return resultado;
     }  
-     
-        
+         public List<Orden_Plato> ListaPlatoxOrden(int Orden_id) throws Exception{
+        List<Orden_Plato> resultado = new ArrayList<Orden_Plato>();
+        try {
+            String sql="select * from Orden_Plato "+
+                    "where Orden like '%%%s%%'";
+            sql=String.format(sql,Orden_id);
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+            resultado.add(RenderOrden_Plato(rs));
+            }
+        } catch (SQLException ex) {
+        return resultado;
+        }
+        return resultado;
+    }
+         
+     private List<Adicional> getAdicionalXOrden_plato(ResultSet d) throws Exception {
+      List<Adicional> resultado = new ArrayList<Adicional>();
+        try {
+            String sql="select * from Orden_Plato_Adicional "
+                    + "where Orden like '%%%s%%' and Plato like '%%%s%%'";
+            sql=String.format(sql,d.getInt("Orden"),d.getInt("Plato"));
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                resultado.add(getAdicional(rs.getInt("Adicional")));
+            }
+        } catch (SQLException ex) {
+        return resultado;
+        }
+        return resultado;
+    }
+    
+    
+    
     //**************************RENDERS********************************    
       
         private Persona PersonaRender(ResultSet rs) {
@@ -255,14 +286,13 @@ public class Dao {
             a.setId( rs.getInt("id"));
             a.setDetalle(rs.getString("detalle"));
             a.setPrecio(rs.getDouble("precio"));
-            a.setAdicionalesID(rs.getInt("Adicionales_id"));
             return a;
         } catch (SQLException ex) {
             return null;
         }
     }
      
-     private Adicionales AdicionalesRender(ResultSet rs) {
+     private Adicionales AdicionalesRender(ResultSet rs) throws Exception {
            Adicionales a = new Adicionales();
         try {
             a.setId( rs.getInt("id"));
@@ -328,14 +358,29 @@ public class Dao {
             o.setEntrega_recoge(rs.getBoolean("entrega_recoge"));
             o.setFecha(rs.getString("fecha"));
             o.setEstado(rs.getInt("estado"));
-            o.setCliente((Cliente)getPersona(rs.getString("Persona_correo")));
-            o.setDireccion(getDireccion(rs.getInt("Direccion_id")));
+            o.setCliente((Cliente)getPersona(rs.getString("Persona")));
+            o.setDireccion(getDireccion(rs.getInt("Direccion")));
             o.setPlatos(ListaPlatoxOrden(o.getId()));
             return o;
         } catch (SQLException ex) {
             return null;
         }
     }
-  
+
+    private Orden_Plato RenderOrden_Plato(ResultSet rs) throws Exception {
+          Orden_Plato op = new Orden_Plato();
+            try {
+                op.setPlato(getPlato(rs.getInt("Plato")));
+                op.setCantidad(rs.getInt("cantidad"));
+                op.setDetalle(rs.getString("Detalle"));
+                op.setTotal(rs.getDouble("total"));
+                op.setAdicionales(getAdicionalXOrden_plato(rs));
+                return op;
+           } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+   
      
 }

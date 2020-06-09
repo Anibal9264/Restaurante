@@ -14,16 +14,15 @@
   <!-- Custom styles for this template -->
   <link href="/Restaurante/css/Cliente/principal/shop-homepage.css" rel="stylesheet">
   <link href="/Restaurante/css/Cliente/principal/app.css" rel="stylesheet">
-  <link href="/Restaurante/css/Cliente/principal/estilos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link href="/Restaurante/css/Cliente/principal/w3.css" rel="stylesheet">
+  <link href="/Restaurante/css/Cliente/principal/estilos.css" rel="stylesheet">
   <!-- JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> 
   <script src="/Restaurante/js/Cliente/principal/categoria.js"></script>
   <script src="/Restaurante/js/Cliente/principal/menu.js"></script>
-  <script src="/Restaurante/js/Cliente/principal/carrito.js"></script>
+  <script src="/Restaurante/js/Cliente/principal/Orden.js"></script>
 </head>
 
 <body>
@@ -31,7 +30,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Start Bootstrap</a>
+      <a class="navbar-brand" href="#">La Cuchara</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -39,11 +38,11 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
             <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
+            <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a id="NombreC" class="nav-link" href="#">About</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Services</a>
@@ -63,14 +62,24 @@
 
       <div class="col-lg-3">
       <h1 class="my-4">Restaurante</h1>
-        <div class="w3-dropdown-hover">
-        <button class="w3-button w3-black">Categorias</button>
-        <div id="categorias" class="list-group w3-dropdown-content w3-bar-block w3-border">
+        <a class="btn btn-outline-primary w-100" data-toggle="collapse" href="#categorias" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Categorias
+        </a>
+        <br>
+        <br>
+        <div id="categorias" class="collapse btn-group-vertical" >
          <!--Categorias Lista -->
         </div>
-       </div>
-       <h3 class="my-5">Carrito</h3>
-      </div>
+        <a class="btn btn-outline-primary w-100" data-toggle="collapse" href="#platosOrden" role="button" aria-expanded="false" aria-controls="collapseExample" >
+           Orden
+        </a>
+        <br>
+        <br>
+        <div class="panel">
+            <ul class="list-group collapse.show" id="platosOrden" > </ul>
+        </div>
+             
+        </div>
       <!-- /.col-lg-3 -->
 
       <div class="col-lg-9">
@@ -103,7 +112,8 @@
         </div>
 
         <div  id="platoslist" class="row"></div>
-       <div class="modal fade" id="add-modal" tabindex="-1" role="dialog"></div>
+       <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-hidden="true"></div>
+       <div class="modal fade" id="add-modal2" tabindex="-1" role="dialog" aria-hidden="true"></div>
 
       </div>
       <!-- /.col-lg-9 -->
@@ -115,7 +125,7 @@
   <!-- /.container -->
 
   <!-- Footer -->
-  <footer class="py-5 bg-dark">
+  <footer class=" bg-dark page-footer pt-4">
     <div class="container">
       <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
     </div>
