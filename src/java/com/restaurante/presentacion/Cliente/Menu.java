@@ -1,5 +1,5 @@
 
-package com.restaurante.presencion.Cliente;
+package com.restaurante.presentacion.Cliente;
 
 import com.restaurante.logic.Adicionales;
 import com.restaurante.logic.Model;

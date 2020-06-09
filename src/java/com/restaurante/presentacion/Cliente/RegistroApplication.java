@@ -1,4 +1,4 @@
-package com.restaurante.presencion.Cliente;
+package com.restaurante.presentacion.Cliente;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

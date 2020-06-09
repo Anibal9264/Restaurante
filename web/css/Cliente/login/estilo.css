@@ -18,9 +18,11 @@ and open the template in the editor.
 }
 
 .bg-image {
-  background-image: url('https://source.unsplash.com/WEQbe2jBg40/600x1200');
-  background-size: cover;
+  background-image:  url(/Restaurante/images/flyer.png);
+  background-size: auto;
   background-position: center;
+  height: 1080px;
+  weight: 763px;
 }
 
 .login-heading {
@@ -29,6 +31,7 @@ and open the template in the editor.
 
 .btn-login {
   font-size: 0.9rem;
+  
   letter-spacing: 0.05rem;
   padding: 0.75rem 1rem;
   border-radius: 2rem;
@@ -43,7 +46,8 @@ and open the template in the editor.
 .form-label-group>label {
   padding: var(--input-padding-y) var(--input-padding-x);
   height: auto;
-  border-radius: 2rem;
+  border-radius: 1rem;
+  color: darkgray;
 }
 
 .form-label-group>label {
@@ -55,11 +59,13 @@ and open the template in the editor.
   margin-bottom: 0;
   /* Override default `<label>` margin */
   line-height: 1.5;
-  color: #495057;
+  color: grey;
   cursor: text;
   /* Match the input under the label */
   border: 1px solid transparent;
+  
   border-radius: .25rem;
+
   transition: all .1s ease-in-out;
 }
 
@@ -92,7 +98,7 @@ and open the template in the editor.
   padding-top: calc(var(--input-padding-y) / 3);
   padding-bottom: calc(var(--input-padding-y) / 3);
   font-size: 12px;
-  color: #777;
+  color: grey;
 }
 
 /* Fallback for Edge
