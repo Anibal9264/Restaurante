@@ -45,6 +45,10 @@ public class Model {
           return new ArrayList();
       }
     }
+
+    public void addOrden(Orden o) throws Exception {
+      base.OrdenAdd(o);
+    }
     
   
     

@@ -1,23 +1,30 @@
 function ObtenerDatosOrden(plato){
-   Orden_plato={
-       Plato: plato,
+    var adicionales =[];
+     $("input[type=checkbox]:checked").each(function() {
+         Adicional={
+             id:$(this).attr("id")
+         };
+      adicionales.push(Adicional);
+     });
+    Orden_Plato={
+       plato: plato,
        cantidad:$('#cantidad').val(),
        detalle:$('#comentario').val(),
        total: $('#totalP').val(),
-       adicionales:[]  // me falta esto
+       adicionales:adicionales
    };
   
    var obj = $.parseJSON(sessionStorage.getItem('orden'));
    var  ot = obj.total;
-   var t = parseFloat(ot)+parseFloat(Orden_plato.total);
+   var t = parseFloat(ot)+parseFloat(Orden_Plato.total);
    obj.total= t;
-   obj.Orden_platos.push(Orden_plato);
+   obj.Orden_platos.push(Orden_Plato);
    ActualizarOrden(obj);
 }
 
 function ActualizarOrden(obj){
     sessionStorage.removeItem('orden');
-   sessionStorage.setItem('orden',JSON.stringify(obj)); 
+    sessionStorage.setItem('orden',JSON.stringify(obj)); 
 }
 
 $(window).ready(function(){
@@ -27,8 +34,12 @@ $(window).ready(function(){
          Orden={
              total: 0.0,
              Entrega_recoje:true,
+             fecha:"",
              estado:0,
-             Orden_platos:[]
+             cliente:"",
+             direccion:"",
+             Orden_platos:[],
+             formaPago:"Efectivo"             
          };
          sessionStorage.setItem('orden',JSON.stringify(Orden));
   
@@ -96,20 +107,21 @@ function CargarEncabezado(listado,obj){
     var li =$("<li>");
     li.addClass("btn-group btn-group-toggle list-group-item");
     li.attr("data-toggle","buttons");
-    li.html("<label  id='Loption1' class='btn btn-secondary w-50 '>"+
-      "<input type='radio' name='options' id='option1' autocomplete='off' > Recoge"+
+    li.html("<label  id='Lop1' class='btn btn-secondary w-50 '>"+
+      "<input type='radio' name='options' autocomplete='off' > Recoge"+
       "</label>"+
-      "<label id='Loption2' class='btn btn-secondary w-50 '>"+
-       "<input type='radio' name='options' id='option2' autocomplete='off'> Enviar"+
+      "<label id='Lop2' class='btn btn-secondary w-50 '>"+
+       "<input type='radio' name='options' autocomplete='off'> Enviar"+
        "</label>");
-       
-    if(obj.Entrega_recoje){li.find("#Loption1").addClass("active"); 
-        li.find("#option1").attr("checked");}
-    else {li.find("#Loption2").addClass("active");
-        li.find("#option2").attr("checked");}
+    li.find("#Lop1").on("click",()=>{obj.Entrega_recoje=true;ActualizarOrden(obj);});
+    li.find("#Lop2").on("click",()=>{obj.Entrega_recoje=false;ActualizarOrden(obj);});
+    if(obj.Entrega_recoje){
+        li.find("#Lop1").addClass("active"); 
+        li.find("#Lop1").attr("checked");}
+    else {li.find("#Lop2").addClass("active");
+          li.find("#Lop2").attr("checked");}
     
-    li.find("#Loption1").on("click",()=>{obj.Entrega_recoje=true;ActulizarOrden(obj);});
-    li.find("#Loption2").on("click",()=>{obj.Entrega_recoje=false;ActulizarOrden(obj);});
+   
     listado.append(li);  
     
 }
@@ -118,7 +130,7 @@ function rowPO(listado,op,i){
         li.addClass("list-group-item d-flex justify-content-between align-items-center ");
 	li.html("<button id='delP' type='button' class='close' aria-label='Close'>"+
            "<small aria-hidden='true'>&times;</small> </button>"+
-           "<small>"+op.Plato.nombre+"</small>"+
+           "<small>"+op.plato.nombre+"</small>"+
           "<button class='btn btn-light btn2' id='Omenos' type='button'>-</button>"+
            "<span class='badge badge-primary badge-pill'>"+op.cantidad+"</span>"+
            "<button class='btn btn-light btn2' id='Omas' type='button'>+</button>"+
@@ -190,19 +202,32 @@ function EliminarPdeLista(i,op){
 
  function CargarDatosAOrden(){
  
-  //var orden = $.parseJSON(sessionStorage.getItem('orden')); 
+  var orden = $.parseJSON(sessionStorage.getItem('orden')); 
   var Cliente = $.parseJSON(sessionStorage.getItem('cliente'));
-  popopDireccion(Cliente);
-  //obtener direccion
-  //Fecha
-  //Estado
+  popopDireccion(Cliente,orden);
  }
 
-function popopDireccion(cliente){
+function popopDireccion(cliente,orden){
   var select = $("#Ldirecciones");
-  cliente.direcciones.forEach((d)=>{optionAdd(select,d);});
-  $("#AddDireccion").on("click",()=>{alert("add dierccion");});
-  $("#Continuar").on("click",()=>{alert("forma de pago");});
+  if(!orden.Entrega_recoje){
+   select.removeClass("hide");
+   $("#AddDireccion").removeClass("hide");
+      cliente.direcciones.forEach((d)=>{optionAdd(select,d);});
+      
+   }else{select.addClass("hide");$("#AddDireccion").addClass("hide");}
+  $("#efectivo").on("click",()=>{orden.formaPago="Efectivo";ActualizarOrden(orden);});
+  $("#tarjeta").on("click",()=>{orden.formaPago="Tarjeta";ActualizarOrden(orden);});
+  $("#sinpe").on("click",()=>{orden.formaPago="SINPE Movil";ActualizarOrden(orden);});
+  $("#Realizar").on("click",()=>{
+      if(!orden.Entrega_recoje){
+         orden.direccion=$('#Ldirecciones').find(":selected").val();    
+      }
+     
+      orden.fecha = hoyFecha();
+      orden.cliente = cliente.correo;
+      ActualizarOrden(orden);
+      RealizarYGuargarOrden();
+  });
   $('#add-modal2').modal('show');
 }
 function optionAdd(select,d){
@@ -210,4 +235,26 @@ function optionAdd(select,d){
     option.val(d.id);
     option.html(d.provincia+","+d.canton+","+d.distrito+","+d.exacta);
     select.append(option);
+    
 }
+
+
+function hoyFecha(){
+    
+    var hoy = new Date();
+        var dd = hoy.getDay();
+        var mm = hoy.getMonth()+1;
+        var yyyy = hoy.getFullYear();
+        var hh = hoy.getHours();
+        var mn = hoy.getMinutes();
+        var ss = hoy.getSeconds();
+        return yyyy+'-'+mm+'-'+dd+' '+hh+':'+mn+':'+ss;
+}
+
+
+ function RealizarYGuargarOrden(){
+      $.ajax({type: "POST", url:"/Restaurante/api/realizar",
+                data: sessionStorage.getItem('orden'),contentType: "application/json"})
+      .then( 
+             (error)=>{ alert(errorMessage(error.status));});  
+ }
