@@ -4,7 +4,6 @@ package com.restaurante.data;
 import com.restaurante.logic.Adicional;
 import com.restaurante.logic.Adicionales;
 import com.restaurante.logic.Categoria;
-import com.restaurante.logic.Cliente;
 import com.restaurante.logic.Direccion;
 import com.restaurante.logic.Orden;
 import com.restaurante.logic.Orden_Plato;
@@ -78,11 +77,14 @@ public class Dao {
      }
         
      public void OrdenAdd(Orden o) throws Exception{
+        String sql="insert into restaurante.orden (total,entrega_recoge,fecha,estado,"
+                 + "Persona,Direccion)"+
+         " values('%s','%s','%s','%s','%s','%s')";
         String sql="insert into Orden (total,entraga_recoge,fecha,estado,"
                  + "Persona,Direccion)"+
          " values('%s')";
         sql=String.format(sql,o.getTotal(),o.toEntregaRecoge(),o.getFecha(),
-                o.getEstado(),o.getCliente().getCorreo(),o.getDireccion().getId());
+                o.getEstado(),o.getCliente(),o.getDireccion());
         int count=db.executeUpdate(sql);
         if (count==0){
             throw new Exception("Orden ya existe");

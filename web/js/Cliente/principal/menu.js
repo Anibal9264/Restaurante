@@ -112,6 +112,9 @@ function row(listado,plato){
   }
   
   function rowAD(listado,a){
+      var h5 =$("<h5/>");
+      h5.html(a.nombre);
+      listado.append(h5);   
        var h5 =$("<h5/>");
        h5.html(a.nombre);
        listado.append(h5);   
