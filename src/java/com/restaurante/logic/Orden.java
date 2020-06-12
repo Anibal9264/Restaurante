@@ -17,11 +17,6 @@ public class Orden {
    private String formaPago;
 
     public Orden(int id, Double total, boolean Entrega_recoge, String fecha, int estado, String cliente, String direccion, List<Orden_Plato> Orden_platos, String formaPago) {
-   private Cliente cliente;
-   private Direccion direccion;
-   private List<Orden_Plato> platos;
- 
-    public Orden(int id, Cliente cliente, List<Orden_Plato> platos, Double total, boolean Entrega_recoge, String fecha, Direccion direccion, int estado) {
         this.id = id;
         this.total = total;
         this.Entrega_recoge = Entrega_recoge;
@@ -51,22 +46,6 @@ public class Orden {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public List<Orden_Plato> getPlatos() {
-        return platos;
-    }
-
-    public void setPlatos(List<Orden_Plato> platos) {
-        this.platos = platos;
     }
 
     public Double getTotal() {

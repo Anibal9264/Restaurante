@@ -26,8 +26,7 @@ function row(listado,plato){
               "</div>"
                );  
         div.find("#deta").on("click",()=>{show(plato);});
-	listado.append(div); 
-          
+	listado.append(div);         
   } 
   
   function show(plato){
@@ -101,7 +100,6 @@ function row(listado,plato){
        $('input[type="checkbox"]').click(function(){
             if($(this).is(":checked")){
                sumarAdicional($(this).val());
-             
             }
             else if($(this).is(":not(:checked)")){
                restarAdicional($(this).val());
@@ -111,17 +109,13 @@ function row(listado,plato){
 
   }
   
-  function rowAD(listado,a){
-      var h5 =$("<h5/>");
-      h5.html(a.nombre);
-      listado.append(h5);   
+  function rowAD(listado,a){  
        var h5 =$("<h5/>");
        h5.html(a.nombre);
        listado.append(h5);   
       if(!a.tipo)a.listAdicionales.forEach((b)=>{chekbox(listado,b);});
       if(a.tipo)a.listAdicionales.forEach((b)=>{radio(listado,b);});
       var h5 =$("<h5/>");
-      h5.html("Adicionales");
       listado.append(h5); 
   }
   
@@ -140,7 +134,7 @@ function row(listado,plato){
   function radio(listado,b){
      var div =$("<div/>");
    div.html(
-   "<input class='form-check-input' type='radio' name='exampleRadios'"+
+   "<input id='"+b.id+"' class='form-check-input' type='radio' name='exampleRadios'"+
    "id='exampleRadios2' value='option2'>"+
    "<label class='form-check-label' for='exampleRadios2'>"+b.detalle+"</label>"
     );

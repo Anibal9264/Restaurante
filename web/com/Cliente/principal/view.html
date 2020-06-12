@@ -23,6 +23,9 @@
   <script src="/Restaurante/js/Cliente/principal/categoria.js"></script>
   <script src="/Restaurante/js/Cliente/principal/menu.js"></script>
   <script src="/Restaurante/js/Cliente/principal/Orden.js"></script>
+  <script src="/Restaurante/js/Cliente/login/login.js" ></script> 
+  <script src="/Restaurante/js/Cliente/principal/principal.js"></script>
+  
 </head>
 
 <body>
@@ -42,10 +45,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a id="NombreC" class="nav-link" href="#">About</a>
+            <a id="Login" class="nav-link">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
+            <a id="Logout" class="nav-link hide">Logout</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Contact</a>
@@ -114,7 +117,15 @@
         <div  id="platoslist" class="row"></div>
        <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-hidden="true"></div>
        <div class="modal fade" id="add-modal2" tabindex="-1" role="dialog" aria-hidden="true"></div>
-
+       <div class="modal fade" id="comparRealizada" tabindex="-1" role="dialog" aria-hidden="true">
+   <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Realizada con exito!!</h5>
+      </div>
+   </div>
+  </div>
+       </div>
       </div>
       <!-- /.col-lg-9 -->
 

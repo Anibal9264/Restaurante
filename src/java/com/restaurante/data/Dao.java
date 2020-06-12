@@ -77,15 +77,23 @@ public class Dao {
      }
         
      public void OrdenAdd(Orden o) throws Exception{
-        String sql="insert into restaurante.orden (total,entrega_recoge,fecha,estado,"
+         String sql;
+        if(o.getDireccion().isEmpty()){
+        sql="insert into restaurante.orden (total,entrega_recoge,fecha,estado,"
+                 + "Persona)"+
+         " values('%s','%s','%s','%s','%s')";
+        sql=String.format(sql,o.getTotal(),o.toEntregaRecoge(),o.getFecha(),
+                o.getEstado(),o.getCliente());
+        }else{
+        sql="insert into restaurante.orden (total,entrega_recoge,fecha,estado,"
                  + "Persona,Direccion)"+
          " values('%s','%s','%s','%s','%s','%s')";
-        String sql="insert into Orden (total,entraga_recoge,fecha,estado,"
-                 + "Persona,Direccion)"+
-         " values('%s')";
         sql=String.format(sql,o.getTotal(),o.toEntregaRecoge(),o.getFecha(),
                 o.getEstado(),o.getCliente(),o.getDireccion());
+        }
         int count=db.executeUpdate(sql);
+        
+        // aca tengo que agregar aun ORDEN PLATO Y OrdenPlatoAdicional
         if (count==0){
             throw new Exception("Orden ya existe");
         }
@@ -105,7 +113,7 @@ public class Dao {
       
     //**************************GETS********************************
     public Persona getPersona(String correo) throws Exception {
-     String sql="select * from Persona where correo like '%%%s%%'";
+     String sql="select * from restaurante.persona where correo like '%%%s%%'";
         sql = String.format(sql,correo);
         ResultSet rs =  db.executeQuery(sql);
         if (rs.next()) {
@@ -153,7 +161,7 @@ public class Dao {
     }
     
      public Direccion getDireccion(int Direccion_id) throws Exception {
-     String sql="select * from Direccion where id like '%%%s%%'";
+     String sql="select * from restaurante.direccion where id like '%%%s%%'";
         sql = String.format(sql,Direccion_id);
         ResultSet rs =  db.executeQuery(sql);
         if (rs.next()) {
@@ -263,11 +271,26 @@ public class Dao {
         return resultado;
     }
     
+      private List<Direccion> ListDirecciones(String correo) throws Exception {
+      List<Direccion> resultado = new ArrayList<Direccion>();
+        try {
+            String sql="select * from restaurante.direccion "
+                    + "where Persona like '%%%s%%'";
+            sql=String.format(sql,correo);
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                resultado.add(getDireccion(rs.getInt("id")));
+            }
+        } catch (SQLException ex) {
+        return resultado;
+        }
+        return resultado;
+    }
     
     
     //**************************RENDERS********************************    
       
-        private Persona PersonaRender(ResultSet rs) {
+        private Persona PersonaRender(ResultSet rs) throws Exception {
            Persona p = new Persona();
         try {
             p.setCorreo(rs.getString("correo"));
@@ -276,6 +299,7 @@ public class Dao {
             p.setContraseña(rs.getString("contraseña"));
             p.setTelefono(rs.getNString("telefono"));
             p.setIsAdmin(rs.getBoolean("isAdmin"));
+            p.setDirecciones(ListDirecciones(p.getCorreo()));
             return p;
         } catch (SQLException ex) {
             return null;
@@ -360,9 +384,9 @@ public class Dao {
             o.setEntrega_recoge(rs.getBoolean("entrega_recoge"));
             o.setFecha(rs.getString("fecha"));
             o.setEstado(rs.getInt("estado"));
-            o.setCliente((Cliente)getPersona(rs.getString("Persona")));
-            o.setDireccion(getDireccion(rs.getInt("Direccion")));
-            o.setPlatos(ListaPlatoxOrden(o.getId()));
+           // o.setCliente((Cliente)getPersona(rs.getString("Persona")));
+           // o.setDireccion(getDireccion(rs.getInt("Direccion")));
+           // o.setPlatos(ListaPlatoxOrden(o.getId()));
             return o;
         } catch (SQLException ex) {
             return null;

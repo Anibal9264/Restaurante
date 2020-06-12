@@ -16,10 +16,10 @@ public class Adicional {
     
 
      public Adicional() {
-        this.id = 1;
+        this.id = 0;
         this.detalle = "";
         this.precio = 0.0;
-        this.adicionalesID = 1;
+        this.adicionalesID = 0;
     }
 
     public int getAdicionalesID() {

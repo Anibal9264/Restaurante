@@ -1,41 +1,48 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.restaurante.presentacion.Cliente;
 
-import com.restaurante.logic.Categoria;
-import com.restaurante.logic.Cliente;
+package com.restaurante.presentacion.Cliente;
 import com.restaurante.logic.Model;
-import java.util.List;
-import javax.ws.rs.GET;
+import com.restaurante.logic.Persona;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.NotFoundException;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+
 @Path("/login")
-/**
- *
- * @author STACY
- */
 public class Login {
-//    @GET
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public List<Categoria> list() { 
-//       return Model.instance().getCategorias();
-//   }
-    ///////////////////////////////////////////////////////
-    @GET
-    @Path("{correo}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Cliente get(@PathParam("correo") String correo) {
+    
+@Context
+    HttpServletRequest request;
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)    
+    public Persona login(Persona cliente) {  
+        Persona logged=null;
         try {
-            return Model.instance().getCliente(correo);
+            logged=Model.instance().get(cliente);
+            if(!logged.getContraseña().equals(cliente.getContraseña())){
+                throw new Exception("Clave incorrecta");
+            }
+            HttpSession session = request.getSession(true);
+            session.setAttribute("persona",logged);
+            logged.setContraseña("");
+            return logged;
         } catch (Exception ex) {
-            throw new NotFoundException(); 
-        }
+            throw new NotFoundException();
+        }  
     }
-    ////////////////////////////////////////////////////////
+    
+    @DELETE 
+    public void logout() {  
+        HttpSession session = request.getSession(true);
+        session.removeAttribute("persona");           
+        session.invalidate();
+    }
+    
 }

@@ -1,6 +1,9 @@
 
 package com.restaurante.logic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Persona {
  private String nombre;
  private String apellidos;
@@ -8,14 +11,16 @@ public class Persona {
  private String contraseña;
  private String telefono;
  private boolean isAdmin;
+ private List<Direccion> direcciones;
 
-    public Persona(String nombre, String apellidos, String correo, String contraseña, String telefono,boolean isAdmin) {
+    public Persona(String nombre, String apellidos, String correo, String contraseña, String telefono,boolean isAdmin,List<Direccion> direcciones) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.correo = correo;
         this.contraseña = contraseña;
         this.telefono = telefono;
         this.isAdmin = isAdmin;
+        this.direcciones = direcciones;
     }
      public Persona() {
         this.nombre = "";
@@ -24,6 +29,15 @@ public class Persona {
         this.contraseña = "";
         this.telefono = "";
         this.isAdmin = false;
+        this.direcciones = new ArrayList();
+    }
+
+    public List<Direccion> getDirecciones() {
+        return direcciones;
+    }
+
+    public void setDirecciones(List<Direccion> direcciones) {
+        this.direcciones = direcciones;
     }
 
     public boolean isIsAdmin() {
