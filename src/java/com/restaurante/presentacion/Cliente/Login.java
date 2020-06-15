@@ -8,6 +8,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
@@ -26,13 +27,27 @@ public class Login {
         Persona logged=null;
         try {
             logged=Model.instance().get(cliente);
+            if(!cliente.getContraseña().isEmpty()){
             if(!logged.getContraseña().equals(cliente.getContraseña())){
                 throw new Exception("Clave incorrecta");
             }
             HttpSession session = request.getSession(true);
             session.setAttribute("persona",logged);
             logged.setContraseña("");
+            }
             return logged;
+        } catch (Exception ex) {
+            throw new NotFoundException();
+        }  
+    }
+    
+    
+    
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)     
+    public void AddPersona(Persona cliente) {
+       try {
+            Model.instance().addPersona(cliente);
         } catch (Exception ex) {
             throw new NotFoundException();
         }  
@@ -44,5 +59,9 @@ public class Login {
         session.removeAttribute("persona");           
         session.invalidate();
     }
+    
+   
+    
+    
     
 }

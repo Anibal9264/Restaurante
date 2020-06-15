@@ -166,8 +166,11 @@ function pop(cliente,orden){
   if(!orden.Entrega_recoje){
    select.removeClass("hide");
    $("#AddDireccion").removeClass("hide");
-      cliente.direcciones.forEach((d)=>{optionAdd(select,d);});
-      
+   $("#AddDireccion").on("click",()=>{$('#direccion-modal').modal('show');});
+    $("#AddD").on("click",()=>{$('#direccion-modal').modal('hide');
+     addDireccion();
+   });
+    cliente.direcciones.forEach((d)=>{optionAdd(select,d);});  
    }else{select.addClass("hide");$("#AddDireccion").addClass("hide");}
   $("#efectivo").on("click",()=>{orden.formaPago="Efectivo";ActualizarOrden(orden);});
   $("#tarjeta").on("click",()=>{orden.formaPago="Tarjeta";ActualizarOrden(orden);});
@@ -187,9 +190,23 @@ function optionAdd(select,d){
     var option = $('<option>');
     option.val(d.id);
     option.html(d.provincia+","+d.canton+","+d.distrito+","+d.exacta);
-    select.append(option);
-    
+    select.append(option);   
 }
+
+ function addDireccion(){
+   Direccion={
+       provincia:$("#provincia").val(),
+       canton:$("#canton").val(),
+       distrito:$("#distrito").val(),
+       exacta:$("#exacta").val()
+   };
+   $.ajax({type: "POST", url:"/Restaurante/api/direccion",
+      data: JSON.stringify(Direccion),contentType: "application/json"})
+      .then((persona)=>{
+          persona.correo="";
+          persona.contraseña="";
+          CargarCliente(persona);}); 
+ }
 
 
 function hoyFecha(){

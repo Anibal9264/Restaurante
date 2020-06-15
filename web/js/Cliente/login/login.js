@@ -1,10 +1,64 @@
 
+window.existeP;
+
  function loaded(){
   $("#login").on("click",()=>{Login();});
   $("#Logout").on("click",()=>{Logout();});
+  $("#Bregistro").on("click",()=>{RegistroShow();});
+  $('#modalRegistro').load("registro.html");
+  existeP = null;
  }
 $(loaded);
 
+function RegistroShow(){
+    $("#email").attr("placeholder","tucorreo@example.com");
+    $("#email").removeClass("is-invalid");
+    $("#formularioR")[0].reset();
+    $('#modalRegistro').modal("show");
+    $("#email").on("change",()=>{verificar();});
+}
+
+function verificar(){
+    existeP = null;
+    existe();
+    if(!existeP){
+         $("#email").removeClass("is-invalid");
+         $("#email").addClass("is-valid");
+    }
+}
+
+function existe(){
+   persona={
+     correo:$("#email").val().toLowerCase()
+   };
+    $.ajax({type: "POST", url:"/Restaurante/api/login",
+                data: JSON.stringify(persona),contentType: "application/json"})
+      .then((persona)=>{if(persona){existeP = persona;
+           $("#email").removeClass("is-valid");
+           $("#email").addClass("is-invalid");  
+           $("#email").val("");
+           $("#email").attr("placeholder",persona.correo);
+            
+           
+        }});  
+}
+
+function  AddUser(theForm){
+       persona={
+          nombre: theForm.nombre.value,
+          apellidos: theForm.apellidos.value,
+          telefono: theForm.telefono.value,
+          correo: theForm.email.value.toLowerCase(),
+          contraseña: theForm.contra.value
+       };
+     AddPersona(persona);
+}
+
+function AddPersona(persona){
+      $.ajax({type:"PUT", url:"/Restaurante/api/login",
+      data: JSON.stringify(persona),contentType: "application/json"})
+      .then((error)=>{errorMessage(error.status,$("#loginErrorDiv"));});
+}
 
 function Login(){
    if(!validar()) return; 
@@ -14,12 +68,11 @@ function Login(){
    };
    $.ajax({type: "POST", url:"/Restaurante/api/login",
                 data: JSON.stringify(persona),contentType: "application/json"})
-      .then((persona)=>{CargarCliente(persona);},
+      .then((persona)=>{persona.correo="";CargarCliente(persona);},
              (error)=>{errorMessage(error.status,$("#loginErrorDiv"));});  
 }
 
 function CargarCliente(persona){
-  persona.correo="";
   sessionStorage.setItem('cliente',JSON.stringify(persona));
   window.location.href = "/Restaurante/com/Cliente/principal/view.html";
 }

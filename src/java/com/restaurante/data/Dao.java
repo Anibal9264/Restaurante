@@ -100,7 +100,7 @@ public class Dao {
      }
      
       public void DireccionAdd(Direccion d) throws Exception{
-        String sql="insert into Direccion (provincia,canton,distrito,exacta,"
+        String sql="insert into restaurante.direccion (provincia,canton,distrito,exacta,"
                  + "Persona)"+
          " values('%s','%s','%s','%s','%s')";
         sql=String.format(sql,d.getProvincia(),d.getCanton(),d.getDistrito(),
@@ -113,7 +113,7 @@ public class Dao {
       
     //**************************GETS********************************
     public Persona getPersona(String correo) throws Exception {
-     String sql="select * from restaurante.persona where correo like '%%%s%%'";
+     String sql="select * from restaurante.persona where correo like '%s'";
         sql = String.format(sql,correo);
         ResultSet rs =  db.executeQuery(sql);
         if (rs.next()) {
@@ -275,7 +275,7 @@ public class Dao {
       List<Direccion> resultado = new ArrayList<Direccion>();
         try {
             String sql="select * from restaurante.direccion "
-                    + "where Persona like '%%%s%%'";
+                    + "where Persona like '%s'";
             sql=String.format(sql,correo);
             ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
@@ -368,7 +368,7 @@ public class Dao {
             d.setCanton(rs.getString("canton"));
             d.setDistrito(rs.getString("distrito"));
             d.setExacta(rs.getString("exacta"));
-            d.setPersona_correo(rs.getString("Persona_correo"));
+            d.setPersona_correo(rs.getString("Persona"));
             return d;
         } catch (SQLException ex) {
             return null;

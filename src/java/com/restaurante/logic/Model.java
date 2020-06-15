@@ -49,6 +49,14 @@ public class Model {
     public Persona get(Persona cliente) throws Exception {
      return base.getPersona(cliente.getCorreo());
     }
+
+    public void addPersona(Persona cliente) throws Exception {
+       base.PersonaAdd(cliente);
+    }
+
+    public void addDireccion(Direccion d) throws Exception {
+        base.DireccionAdd(d);
+    }
     
   
     

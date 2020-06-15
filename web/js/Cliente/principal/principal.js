@@ -1,6 +1,7 @@
  function loaded(){
     $('#add-modal').load("detalles.html");
-    $('#add-modal2').load("Direcciones.html");
+    $('#add-modal2').load("PyD.html");
+    $('#direccion-modal').load("direccion.html");
     GetCategorias();
  }
 $(loaded);
