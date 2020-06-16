@@ -233,7 +233,7 @@ and open the template in the editor.
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Nuevo Platillo</h1>
+            <h1 class="h3 mb-0 text-gray-800">Nuevo Adicional</h1>
             
           </div>
 
@@ -256,38 +256,25 @@ and open the template in the editor.
     <div class="modal-content">
      <section class="container">
                 <h1 class="h2 text-center my-3"></h1>
-                <form class="container " action="/Restaurante/com/Admin/principal/new-plato.html" onsubmit="return AddPlato(this); " name="formulario" id="formularioR">
+                <form class="container " action="/Restaurante/com/Admin/principal/adicional.html" onsubmit="return AddAdicional(this); " name="formulario" id="formularioR">
                     <fieldset>
                         <legend class="h4 text-center">
-                            Platillo
+                            Adicional
                         </legend>
                         <div class="form-group">
-                        <label>ID</label>
-                        <input type="text" id="ID" name="ID" class="form-control" placeholder="11" required>
-                        <div class="invalid-feedback">ID ya existe</div>
+                        <label>ID Plato</label>
+                        <input type="text" id="idP" name="idP" class="form-control" placeholder="1" required>
                         </div>
                         <div class="form-group">
                         <label>Nombre</label>
-                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Crema de brocoli" required>
+                        <input type="text" id="nom" name="nom" class="form-control" placeholder="Salsa" required>
                         </div>
                         <div class="form-group">
-                        <label>Detalle</label>
-                        <input type="text" id="detalle" name="detalle" class="form-control" placeholder="..." required>
-                        </div>
-                        <div class="form-group">
-                        <label>Precio</label>
-                        <input type="text" id="precio" name="precio" class="form-control"  placeholder="3000" required> 
-                        </div>
-                        <div class="form-group">
-                        <label>Disponibles</label>
-                        <input type="text" id="disp" name="disp" class="form-control"  placeholder="#" required> 
-                        </div>
-                        <div class="form-group">
-                        <label>Imagen</label>
-                        <input type="text" id="image" name="image" class="form-control" placeholder="url">
+                        <label>Tipo</label>
+                        <input type="text" id="tipo" name="tipo" class="form-control" placeholder="..." required>
                         </div>
                         <div class="form-group text-center">
-                            <button type="submit" id="envio" class="btn btn-primary ">Agregar</button>
+                            <button type="submit" id="envio" class="btn btn-primary "> Agregar</button>
                         </div>
                     </fieldset>
                 </form>

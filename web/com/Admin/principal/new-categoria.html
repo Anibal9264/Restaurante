@@ -251,31 +251,18 @@
     <div class="modal-content">
      <section class="container">
                 <h1 class="h2 text-center my-3"></h1>
-                <form class="container " action="/Restaurante/com/Cliente/login/view.html" onsubmit="return AddUser(this); " name="formulario" id="formularioR">
+                <form class="container " action="/Restaurante/com/Admin/principal/new-categoria.html" onsubmit="return AddCategoria(this); " name="formulario" id="formularioR">
                     <fieldset>
                         <legend class="h4 text-center">
                             Categoría
                         </legend>
                         <div class="form-group">
-                        <label>Nombre</label>
-                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Jose" required>
+                        <label>Categoría</label>
+                        <input type="text" id="categoria" name="categoria" class="form-control" placeholder="1" required>
                         </div>
                         <div class="form-group">
-                        <label>Apellidos</label>
-                        <input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Badilla Gonzalez" required>
-                        </div>
-                        <div class="form-group">
-                        <label>Telefono</label>
-                        <input type="text" id="telefono" name="telefono" class="form-control" placeholder="8888-8888" required>
-                        </div>
-                        <div class="form-group">
-                        <label>Correo Electronico</label>
-                        <input type="email" id="email" name="email" class="form-control"  placeholder="tucorreo@example.com" required>
-                        <div class="invalid-feedback">Correo ya Existe!!</div>
-                        </div>
-                        <div class="form-group">
-                        <label>Contraseña</label>
-                        <input type="password" id="contra" name="contra" class="form-control" placeholder="password" required>
+                        <label>Plato</label>
+                        <input type="text" id="plato" name="plato" class="form-control" placeholder="2" required>
                         </div>
                         <div class="form-group text-center">
                             <button type="submit" id="envio" class="btn btn-primary "> Agregar</button>
