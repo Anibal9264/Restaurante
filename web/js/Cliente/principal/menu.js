@@ -1,6 +1,6 @@
 
 function GetListPlatos(ID){
-    $.ajax({type: "GET", url:"/Restaurante/api/menu?id="+ID,
+    $.ajax({type: "GET", url:"api/menu?id="+ID,
          contentType: "application/json"})
       .then( (platos)=>{listplatos(platos);},
              (error)=>{ alert(errorMessage(error.status));});    

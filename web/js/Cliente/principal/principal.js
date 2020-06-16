@@ -1,12 +1,23 @@
  function loaded(){
-    $('#add-modal').load("detalles.html");
-    $('#add-modal2').load("PyD.html");
-    $('#direccion-modal').load("direccion.html");
+    $('#Contenido').load("com/Cliente/principal/ini.html");
+    $('#add-modal').load("com/Cliente/principal/detalles.html");
+    $('#add-modal2').load("com/Cliente/principal/PyD.html");
+    $('#direccion-modal').load("com/Cliente/principal/direccion.html");
+    $('#modalRegistro').load("com/Cliente/principal/registro.html");
+  
+    setTimeout(
+     function() 
+     {
+    $("#Login").on("click",()=>{cargarlogin();});
+    $("#Logout").on("click",()=>{Logout();});
+    $("#histo").on("click",()=>{Historialshow();});
     GetCategorias();
+    ordenL();
+     },500);
  }
 $(loaded);
 
-$(window).ready(function(){
+function ordenL(){
      if(sessionStorage.getItem('orden')){
         CargarPlatosOrden();
      }else{
@@ -22,24 +33,12 @@ $(window).ready(function(){
      
      if(sessionStorage.getItem('categoria')){GetListPlatos(sessionStorage.getItem('categoria'));}
      
-});
+}
 
 $(window).unload(function(){
      localStorage.clear();
 });
 
-function CargarDatosCliente(){
-     var cliente = $.parseJSON(sessionStorage.getItem('cliente'));
-     var nom=$("#Login");
-     nom.html(cliente.nombre+" "+cliente.apellidos);
-     $('#Logout').removeClass("hide");
-     $('#Login').attr("href","#");
-}
 
-function quitarDatos(){
-     $('#Logout').addClass("hide");
-     $("#Login").html("Login");
-     $('#Login').attr("href","/Restaurante/com/Cliente/login/view.html");
-}
 
 

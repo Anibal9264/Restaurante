@@ -1,64 +1,100 @@
 
 window.existeP;
 
- function loaded(){
-  $("#login").on("click",()=>{Login();});
-  $("#Logout").on("click",()=>{Logout();});
+ function onloaded(){
+  $("#login").on("click",()=>{Login();});   
   $("#Bregistro").on("click",()=>{RegistroShow();});
-  $('#modalRegistro').load("registro.html");
+  $("#R_envio").on("click",()=>{AddUser();});
   existeP = null;
  }
-$(loaded);
+
+
+function CargarDatosCliente(){
+     var cliente = $.parseJSON(sessionStorage.getItem('cliente'));
+     var nom=$("#Login");
+     nom.html(cliente.nombre+" "+cliente.apellidos);
+     $('#Logout').removeClass("hide");
+     $('#histo').removeClass("hide");
+     $('#Login').off("click");
+}
+
+function quitarDatos(){
+     $('#Logout').addClass("hide");
+     $('#histo').addClass("hide");
+     $("#Login").html("Login");
+    
+}
+
+function cargarlogin(){
+    $('#Contenido').html("");
+    $('#Contenido').load("com/Cliente/principal/login.html");
+     setTimeout(
+    function() 
+     {
+      onloaded();
+     },700);   
+}
 
 function RegistroShow(){
-    $("#email").attr("placeholder","tucorreo@example.com");
-    $("#email").removeClass("is-invalid");
-    $("#formularioR")[0].reset();
+    $("#R_email").attr("placeholder","tucorreo@example.com");
+    $("#R_email").removeClass("is-invalid");
+    $("#R_email").removeClass("is-valid");
     $('#modalRegistro').modal("show");
-    $("#email").on("change",()=>{verificar();});
+    $("#R_email").on("change",()=>{verificar();});
 }
 
 function verificar(){
     existeP = null;
     existe();
     if(!existeP){
-         $("#email").removeClass("is-invalid");
-         $("#email").addClass("is-valid");
+         $("#R_email").removeClass("is-invalid");
+         $("#R_email").addClass("is-valid");
     }
 }
 
 function existe(){
    persona={
-     correo:$("#email").val().toLowerCase()
+     correo:$("#R_email").val().toLowerCase()
    };
-    $.ajax({type: "POST", url:"/Restaurante/api/login",
+    $.ajax({type:"POST", url:"api/login/get",
                 data: JSON.stringify(persona),contentType: "application/json"})
       .then((persona)=>{if(persona){existeP = persona;
-           $("#email").removeClass("is-valid");
-           $("#email").addClass("is-invalid");  
-           $("#email").val("");
-           $("#email").attr("placeholder",persona.correo);
+           $("#R_email").removeClass("is-valid");
+           $("#R_email").addClass("is-invalid");  
+           $("#R_email").val("");
+           $("#R_email").attr("placeholder",persona.correo);
             
            
         }});  
 }
 
-function  AddUser(theForm){
-       persona={
-          nombre: theForm.nombre.value,
-          apellidos: theForm.apellidos.value,
-          telefono: theForm.telefono.value,
-          correo: theForm.email.value.toLowerCase(),
-          contraseña: theForm.contra.value
+function  AddUser(){
+    
+     persona={
+          nombre:$("#R_nombre").val(),
+          apellidos:$("#R_apellidos").val(),
+          telefono:$("#R_telefono").val(),
+          correo:$("#R_email").val(),
+          contraseña:$("#R_contra").val()
        };
-     AddPersona(persona);
+      if (persona.nombre.length === 0 ||
+      persona.apellidos.length === 0 ||
+      persona.telefono.length === 0 ||
+      persona.correo.length === 0 ||
+      persona.contraseña.length === 0
+      ){
+      alert("No puede haber campos vacios");
+    } else {
+      $.ajax({type:"POST", url:"api/login/add",
+       data: JSON.stringify(persona),contentType: "application/json"})
+      .then((persona)=>{persona.correo="";CargarCliente(persona);},
+      (error)=>{errorMessage(error.status,$("#loginErrorDiv"));});
+     }
+      
+       
+        
 }
 
-function AddPersona(persona){
-      $.ajax({type:"PUT", url:"/Restaurante/api/login",
-      data: JSON.stringify(persona),contentType: "application/json"})
-      .then((error)=>{errorMessage(error.status,$("#loginErrorDiv"));});
-}
 
 function Login(){
    if(!validar()) return; 
@@ -66,7 +102,7 @@ function Login(){
      correo:$("#inputEmail").val().toLowerCase(),
      contraseña:$("#inputPassword").val()
    };
-   $.ajax({type: "POST", url:"/Restaurante/api/login",
+   $.ajax({type: "POST", url:"api/login",
                 data: JSON.stringify(persona),contentType: "application/json"})
       .then((persona)=>{persona.correo="";CargarCliente(persona);},
              (error)=>{errorMessage(error.status,$("#loginErrorDiv"));});  
@@ -74,20 +110,19 @@ function Login(){
 
 function CargarCliente(persona){
   sessionStorage.setItem('cliente',JSON.stringify(persona));
-  window.location.href = "/Restaurante/com/Cliente/principal/view.html";
+  window.location.href = "index.html";
 }
 
 
 function Logout(){
-   $.ajax({type: "DELETE",url:"/Restaurante/api/login" })
+   $.ajax({type: "DELETE",url:"api/login" })
    .then( ()=>{logoutSuccess();},
    (error)=>{ errorMessage(error.status,$("#loginErrorDiv"));}); 
 }
 function logoutSuccess(){
   sessionStorage.removeItem('cliente');
-  window.location.href = "/Restaurante/com/Cliente/principal/view.html";
-}
-
+  window.location.href = "index.html";
+  }
   function validar(){
     var error=false;
     $("#formulario input").removeClass("invalid");

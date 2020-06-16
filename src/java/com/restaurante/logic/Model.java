@@ -57,6 +57,10 @@ public class Model {
     public void addDireccion(Direccion d) throws Exception {
         base.DireccionAdd(d);
     }
+
+    public List<Orden> getOrdenes(Persona logged) {
+        return base.ListaOrdenes(logged);
+    }
     
   
     

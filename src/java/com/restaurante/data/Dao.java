@@ -80,24 +80,60 @@ public class Dao {
          String sql;
         if(o.getDireccion().isEmpty()){
         sql="insert into restaurante.orden (total,entrega_recoge,fecha,estado,"
-                 + "Persona)"+
-         " values('%s','%s','%s','%s','%s')";
-        sql=String.format(sql,o.getTotal(),o.toEntregaRecoge(),o.getFecha(),
-                o.getEstado(),o.getCliente());
-        }else{
-        sql="insert into restaurante.orden (total,entrega_recoge,fecha,estado,"
-                 + "Persona,Direccion)"+
+                 + "Persona,formaPago)"+
          " values('%s','%s','%s','%s','%s','%s')";
         sql=String.format(sql,o.getTotal(),o.toEntregaRecoge(),o.getFecha(),
-                o.getEstado(),o.getCliente(),o.getDireccion());
+                o.getEstado(),o.getCliente(),o.getFormaPago());
+        }else{
+        sql="insert into restaurante.orden (total,entrega_recoge,fecha,estado,"
+                 + "Persona,Direccion,formaPago)"+
+         " values('%s','%s','%s','%s','%s','%s','%s')";
+        sql=String.format(sql,o.getTotal(),o.toEntregaRecoge(),o.getFecha(),
+                o.getEstado(),o.getCliente(),o.getDireccion(),o.getFormaPago());
         }
         int count=db.executeUpdate(sql);
         
-        // aca tengo que agregar aun ORDEN PLATO Y OrdenPlatoAdicional
+        //Obtengo el id de la orden que acabo de agregar
+        sql="SELECT MAX(id) AS id2 FROM restaurante.orden where Persona like '%s'";
+        sql=String.format(sql,o.getCliente());
+        ResultSet rs = db.executeQuery(sql);
+        int id=0;
+        if (rs.next()) {
+        id = rs.getInt("id2");
+        }
+        for(Orden_Plato op:o.getOrden_platos()){
+        Orden_platoADD(op,id);
+        }
         if (count==0){
             throw new Exception("Orden ya existe");
         }
      }
+     
+ public void Orden_platoADD (Orden_Plato op, int orden) throws Exception{
+        String sql="insert into restaurante.orden_plato (Orden,Plato,cantidad,detalle,"
+                 + "total)"+
+         " values('%s','%s','%s','%s','%s')";
+        sql=String.format(sql,orden,op.getPlato().getId(),op.getCantidad(),
+                op.getDetalle(),op.getTotal());
+        int count=db.executeUpdate(sql);
+        
+        for(Adicional adicional:op.getAdicionales()){
+             Orden_plato_Adicional(adicional.getId(),op.getPlato().getId(),orden);
+        }
+        if (count==0){
+            throw new Exception("Orden ya existe");
+        }
+ }
+ 
+  public void Orden_plato_Adicional (int adicional,int plato, int orden) throws Exception{
+        String sql="insert into restaurante.orden_plato_adicional (Orden,Plato,Adicional)"
+         + " values('%s','%s','%s')";
+        sql=String.format(sql,orden,plato,adicional);
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("Orden ya existe");
+        }
+ }
      
       public void DireccionAdd(Direccion d) throws Exception{
         String sql="insert into restaurante.direccion (provincia,canton,distrito,exacta,"
@@ -110,6 +146,9 @@ public class Dao {
             throw new Exception("Orden ya existe");
         }
      }
+      
+      
+      
       
     //**************************GETS********************************
     public Persona getPersona(String correo) throws Exception {
@@ -172,6 +211,17 @@ public class Dao {
         }
     }
     
+     public Orden getOrden(int Direccion_id) throws Exception {
+     String sql="select * from restaurante.Orden where id like '%s'";
+        sql = String.format(sql,Direccion_id);
+        ResultSet rs =  db.executeQuery(sql);
+        if (rs.next()) {
+            return OrdenRender(rs);
+        }
+        else{
+            return null;   
+        }
+    }
     
       
     //**************************GETS Listas********************************
@@ -211,7 +261,7 @@ public class Dao {
     public List<Plato> ListaPlatoxCategoria(int Categoria_id) throws Exception{
         List<Plato> resultado = new ArrayList<Plato>();
         try {
-            String sql="select * from Categoria_Plato "+
+            String sql="select * from restaurante.Categoria_Plato "+
                     "where Categoria like '%%%s%%'";
             sql=String.format(sql,Categoria_id);
             ResultSet rs =  db.executeQuery(sql);
@@ -239,7 +289,7 @@ public class Dao {
         }
         return resultado;
     }  
-         public List<Orden_Plato> ListaPlatoxOrden(int Orden_id) throws Exception{
+        public List<Orden_Plato> ListaPlatoxOrden(int Orden_id) throws Exception{
         List<Orden_Plato> resultado = new ArrayList<Orden_Plato>();
         try {
             String sql="select * from Orden_Plato "+
@@ -286,7 +336,21 @@ public class Dao {
         }
         return resultado;
     }
-    
+    public List<Orden> ListaOrdenes(Persona logged) throws Exception {
+    List<Orden> resultado = new ArrayList<Orden>();
+        try {
+            String sql="select * from restaurante.Orden "
+                    + "where Persona like '%s'";
+            sql=String.format(sql,logged.getCorreo());
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                resultado.add(getOrden(rs.getInt("id")));
+            }
+        } catch (SQLException ex) {
+        return resultado;
+        }
+        return resultado;
+    }
     
     //**************************RENDERS********************************    
       
@@ -384,9 +448,10 @@ public class Dao {
             o.setEntrega_recoge(rs.getBoolean("entrega_recoge"));
             o.setFecha(rs.getString("fecha"));
             o.setEstado(rs.getInt("estado"));
-           // o.setCliente((Cliente)getPersona(rs.getString("Persona")));
-           // o.setDireccion(getDireccion(rs.getInt("Direccion")));
-           // o.setPlatos(ListaPlatoxOrden(o.getId()));
+            o.setCliente(rs.getString("Persona"));
+            o.setFormaPago(rs.getString("formaPago"));
+            o.setDireccion(rs.getString("Direccion"));
+            o.setOrden_platos(ListaPlatoxOrden(o.getId()));
             return o;
         } catch (SQLException ex) {
             return null;
@@ -406,6 +471,8 @@ public class Dao {
             return null;
         }
     }
+
+    
 
    
      
