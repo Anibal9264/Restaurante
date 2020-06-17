@@ -21,7 +21,7 @@ function rowO(Tbody,O){
      var tr =$("<tr>");
      tr.html("<td>"+O.fecha+"</td>"+
              "<td>"+estadoR(O.estado)+"</td>"+
-             "<td>"+tipoR(O.Entrega_recoge)+"</td>"+
+             "<td>"+tipoR(O.entrega_recoge)+"</td>"+
              "<td>"+O.formaPago+"</td>"+
              "<td>"+O.total+"</td>");
      
@@ -35,6 +35,6 @@ function estadoR(estado){
 }
 
 function tipoR(t){
-     if(!t) return "Recoje";
+     if(t) return "Recoje";
      return "Envio";       
 }

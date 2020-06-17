@@ -8,7 +8,7 @@ import java.util.List;
 public class Orden {
    private int id;
    private Double total;
-   private boolean Entrega_recoge; // true es entrega y false es recoje
+   private boolean entrega_recoge; // true es entrega y false es recoje
    private String fecha;
    private int estado; // 1 : recivida o enviada 2: Preparacion 3: Lista
    private String cliente;
@@ -19,7 +19,7 @@ public class Orden {
     public Orden(int id, Double total, boolean Entrega_recoge, String fecha, int estado, String cliente, String direccion, List<Orden_Plato> Orden_platos, String formaPago) {
         this.id = id;
         this.total = total;
-        this.Entrega_recoge = Entrega_recoge;
+        this.entrega_recoge = Entrega_recoge;
         this.fecha = fecha;
         this.estado = estado;
         this.cliente = cliente;
@@ -31,7 +31,7 @@ public class Orden {
     public Orden() {
         this.id = 0;
         this.total = 0.0;
-        this.Entrega_recoge = true;
+        this.entrega_recoge = true;
         this.fecha = "";
         this.estado = 0;
         this.cliente = "";
@@ -57,11 +57,11 @@ public class Orden {
     }
 
     public boolean isEntrega_recoge() {
-        return Entrega_recoge;
+        return entrega_recoge;
     }
 
     public void setEntrega_recoge(boolean Entrega_recoge) {
-        this.Entrega_recoge = Entrega_recoge;
+        this.entrega_recoge = Entrega_recoge;
     }
 
     public String getFecha() {
@@ -113,7 +113,7 @@ public class Orden {
     }
 
     public String toEntregaRecoge() {
-        if(Entrega_recoge)return "1";
+        if(entrega_recoge)return "1";
         return "0" ;
     }
     

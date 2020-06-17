@@ -395,7 +395,7 @@ public class Dao {
         }
     }
      
-     private Plato PlatoRender(ResultSet rs) throws Exception {
+   private Plato PlatoRender(ResultSet rs) throws Exception {
            Plato p = new Plato();
         try {
             p.setId( rs.getInt("id"));
@@ -412,7 +412,7 @@ public class Dao {
         }
     }
      
-    private Categoria CategoriaRender(ResultSet rs) throws Exception {
+  private Categoria CategoriaRender(ResultSet rs) throws Exception {
            Categoria c = new Categoria();
         try {
             c.setId( rs.getInt("id"));
@@ -424,7 +424,7 @@ public class Dao {
         }
     }
     
-     private Direccion DireccionRender(ResultSet rs) throws Exception {
+   private Direccion DireccionRender(ResultSet rs) throws Exception {
            Direccion d = new Direccion();
         try {
             d.setId( rs.getInt("id"));

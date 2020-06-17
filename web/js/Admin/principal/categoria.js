@@ -1,15 +1,7 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+function viewNCategoria(){
+    $('#A-Contenido').load("com/Admin/principal/new-categoria.html");
+}
 
-
-function  AddCategoria(theForm){
-       categoria={
-           
-          categoria: theForm.categoria.value,
-          plato: theForm.plato.value
-       };
-     AddCategoria(categoria);
+function viewCategorias(){
+    $('#A-Contenido').load("com/Admin/principal/lista-categ.html");
 }
