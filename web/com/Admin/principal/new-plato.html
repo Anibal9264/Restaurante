@@ -9,7 +9,7 @@
                     <div class="modal-content">
                         <section class="container">
                             <h1 class="h2 text-center my-3"></h1>
-                            <form class="container " name="F-newPlato" id="F-newPlato">
+                          
                                 <fieldset>
                                     <legend class="h4 text-center">
                                         Nuevo plato
@@ -31,14 +31,18 @@
                                         <input type="text" id="P-disp" name="disp" class="form-control"  placeholder="#" required> 
                                     </div>
                                     <div class="form-group">
-                                        <label>Imagen</label>
-                                        <input type="text" id="P-image" name="image" class="form-control" placeholder="url">
+                                      <label>Imagen</label>
+                                    <input type="file" id="P-image" name="P-image" class="img-fluid">
+                                   </div>
+                                    <div class="form-group">
+                                        <img id="imgSalida" width="100%" height="90%"/> 
                                     </div>
+                                    
                                     <div class="form-group text-center">
-                                        <button type="submit" id="P-add" class="btn btn-primary ">Agregar</button>
+                                        <button id="P-add" class="btn btn-primary ">Agregar</button>
                                     </div>
                                 </fieldset>
-                            </form>
+                          
                         </section>
                     </div>
                 </div>

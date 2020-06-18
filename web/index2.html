@@ -2,251 +2,255 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+    <head>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-  <title>Administración</title>
+        <title>Administración</title>
 
-  <!-- css-->
-  <link href="css/Admin/principal/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-  <link href="css/Admin/principal/sb-admin-2.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/Admin/principal/sb-admin-2.css" type="text/css"/>
+        <!-- css-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">   
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link href="css/Admin/principal/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+        <link href="css/Admin/principal/sb-admin-2.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/Admin/principal/sb-admin-2.css" type="text/css"/>
+        <link rel="stylesheet" href="css/Cliente/principal/estilos.css" type="text/css"/>
 
+    </head>
 
-</head>
+    <body id="page-top">
 
-<body id="page-top">
+        <!-- Page Wrapper -->
+        <div id="wrapper">
 
-  <!-- Page Wrapper -->
-  <div id="wrapper">
+            <!-- Sidebar -->
 
-    <!-- Sidebar -->
-    
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-      <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i><img src="/Restaurante/images/restaurante.png" style=" width: 50px; height: 50px"> </i>
-        </div>
-        <div class="sidebar-brand-text mx-3">Nombre</div>
-      </a>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider my-0">
-
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
-          <a class="nav-link" href="#"  id="P-estadistica">
-          <i class="tachometer-alt"></i>
-          <span>Estadisticas</span></a>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Restaurante
-      </div>
-
-       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu-plato" aria-expanded="true" aria-controls="menu-plato">
-
-          <span>Platos</span>
-        </a>
-        <div id="menu-plato" class="collapse" aria-labelledby="menu-plato" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Menú:</h6>
-            <a class="collapse-item" href="#"  id="addPlato">Añadir plato</a>
-            <a class="collapse-item" href="#"  id="view-Platos">Platos</a> 
-          </div>
-        </div>
-      </li>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu-cat" aria-expanded="true" aria-controls="menu-cat">
-         <span>Categorías</span>
-        </a>
-        <div id="menu-cat" class="collapse" aria-labelledby="menu-cat" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Menú:</h6>
-            <a class="collapse-item" href="#"  id="addCategoria">Añadir categoría</a>
-            <a class="collapse-item" href="#"  id="view-Categorias">Categorías</a> 
-          </div>
-        </div>
-      </li>
-        <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu-adicionales" aria-expanded="true" aria-controls="menu-adicionales">
-         <span>Adiciionales</span>
-        </a>
-        <div id="menu-adicionales" class="collapse" aria-labelledby="menu-adicionales" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Menú:</h6>
-            <a class="collapse-item" href="#"  id="addAdicionales">Añadir Adicionales</a>
-            <a class="collapse-item" href="#"  id="view-Adicionales">Adicionales</a> 
-          </div>
-        </div>
-      </li>
-      
-           <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu-adicional" aria-expanded="true" aria-controls="menu-adicional">
-         <span>Adiciional</span>
-        </a>
-        <div id="menu-adicional" class="collapse" aria-labelledby="menu-adicional" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Menú:</h6>
-            <a class="collapse-item" href="#"  id="addAdicional">Añadir Adicional</a>
-            <a class="collapse-item" href="#"  id="view-Adicional">Adicional</a> 
-          </div>
-        </div>
-      </li>
-      
-      
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu-ventas" aria-expanded="true" aria-controls="menu-ventas">
-
-          <span>Ventas</span>
-        </a>
-        <div id="menu-ventas" class="collapse" aria-labelledby="menu-ventas" data-parent="#menu-ventas">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Pedidos:</h6>
-            <a class="collapse-item" href="#" id="viewOrdenes">Órdenes</a>
-            <a class="collapse-item" href="#" id="view-otros">Otros</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Extras
-      </div>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-
-          <span>Usuarios</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login:</h6>
-            <a class="collapse-item" href="#" id="editarP">Editar</a>
-            <a class="collapse-item" href="#" id="addP">Agregar Nuevo</a>
-          </div>
-        </div>
-      </li>
-
-
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
-
-      <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle">
-            <img src="/Restaurante/images/Picture1.png" style=" width: 20px; height: 20px">
-        </button>
-      </div>
-
-    </ul>
-    <div id="content-wrapper" class="d-flex flex-column">
-
-      <!-- Main Content -->
-      <div id="content">
-
-        <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-          <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-
-          </button>
-
-          <!-- Topbar Search -->
-
-
-          <!-- Topbar Navbar -->
-          <ul class="navbar-nav ml-auto">
-
-            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-              </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-
-                      </button>
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center">
+                    <div class="sidebar-brand-icon rotate-n-15">
+                        <i><img src="/Restaurante/images/restaurante.png" style=" width: 50px; height: 50px"> </i>
                     </div>
-                  </div>
-                </form>
-              </div>
-            </li>
+                    <div class="sidebar-brand-text mx-3">Nombre</div>
+                </a>
 
-            <div class="topbar-divider d-none d-sm-block"></div>
-          </ul>
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
 
-        </nav>
-        <!-- End of Topbar -->
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"  id="P-estadistica">
+                        <i class="tachometer-alt"></i>
+                        <span>Estadisticas</span></a>
+                </li>
 
-        <!-- contenido Central de pagina  -->
-        <div class="container-fluid" id="A-Contenido"></div>
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Restaurante
+                </div>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu-plato" aria-expanded="true" aria-controls="menu-plato">
+
+                        <span>Platos</span>
+                    </a>
+                    <div id="menu-plato" class="collapse" aria-labelledby="menu-plato" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Menú:</h6>
+                            <a class="collapse-item" href="#"  id="addPlato">Añadir plato</a>
+                            <a class="collapse-item" href="#"  id="view-Platos">Platos</a> 
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu-cat" aria-expanded="true" aria-controls="menu-cat">
+                        <span>Categorías</span>
+                    </a>
+                    <div id="menu-cat" class="collapse" aria-labelledby="menu-cat" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Menú:</h6>
+                            <a class="collapse-item" href="#"  id="addCategoria">Añadir categoría</a>
+                            <a class="collapse-item" href="#"  id="view-Categorias">Categorías</a> 
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu-adicional" aria-expanded="true" aria-controls="menu-adicional">
+                        <span>Adicional</span>
+                    </a>
+                    <div id="menu-adicional" class="collapse" aria-labelledby="menu-adicional" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Menú:</h6>
+                            <a class="collapse-item" href="#"  id="addAdicional">Añadir Adicional</a>
+                            <a class="collapse-item" href="#"  id="view-Adicional">Adicional</a> 
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu-adicionales" aria-expanded="true" aria-controls="menu-adicionales">
+                        <span>Adicionales</span>
+                    </a>
+                    <div id="menu-adicionales" class="collapse" aria-labelledby="menu-adicionales" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Menú:</h6>
+                            <a class="collapse-item" href="#"  id="addAdicionales">Añadir Adicionales</a>
+                            <a class="collapse-item" href="#"  id="view-Adicionales">Adicionales</a> 
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Nav Item - Utilities Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu-ventas" aria-expanded="true" aria-controls="menu-ventas">
+
+                        <span>Ventas</span>
+                    </a>
+                    <div id="menu-ventas" class="collapse" aria-labelledby="menu-ventas" data-parent="#menu-ventas">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Pedidos:</h6>
+                            <a class="collapse-item" href="#" id="viewOrdenes">Órdenes</a>
+                            <a class="collapse-item" href="#" id="view-otros">Otros</a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Extras
+                </div>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+
+                        <span>Usuarios</span>
+                    </a>
+                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Login:</h6>
+                            <a class="collapse-item" href="#" id="editarP">Editar</a>
+                            <a class="collapse-item" href="#" id="addP">Agregar Nuevo</a>
+                        </div>
+                    </div>
+                </li>
 
 
-      </div>
-      <!-- End of Main Content -->
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
 
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span> La Cuchara del Chef Copyright &copy; Restaurante 2020. All rights reserved.</span>
-          </div>
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle">
+                        <img src="/Restaurante/images/Picture1.png" style=" width: 20px; height: 20px">
+                    </button>
+                </div>
+
+            </ul>
+            <div id="content-wrapper" class="d-flex flex-column">
+
+                <!-- Main Content -->
+                <div id="content">
+
+                    <!-- Topbar -->
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                        <!-- Sidebar Toggle (Topbar) -->
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+
+                        </button>
+
+                        <!-- Topbar Search -->
+
+
+                        <!-- Topbar Navbar -->
+                        <ul class="navbar-nav ml-auto">
+
+                            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                            <li class="nav-item dropdown no-arrow d-sm-none">
+                                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                </a>
+                                <!-- Dropdown - Messages -->
+                                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                                    <form class="form-inline mr-auto w-100 navbar-search">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button">
+
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+
+                            <div class="topbar-divider d-none d-sm-block"></div>
+                        </ul>
+
+                    </nav>
+                    <!-- End of Topbar -->
+
+                    <!-- contenido Central de pagina  -->
+                    <div class="container-fluid" id="A-Contenido"></div>
+
+
+                </div>
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span> La Cuchara del Chef Copyright &copy; Restaurante 2020. All rights reserved.</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
+            </div>
+            <!-- End of Content Wrapper -->
+
         </div>
-      </footer>
-      <!-- End of Footer -->
-
-    </div>
-    <!-- End of Content Wrapper -->
-
-  </div>
-  <!-- End of Page Wrapper -->
+        <!-- End of Page Wrapper -->
 
 
 
-  <!-- Bootstrap core JavaScript-->
+        <!-- Bootstrap core JavaScript-->
 
 
-  <!-- Core plugin JavaScript-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> 
-  <!-- Custom scripts for all pages-->
-  <script src="js/Admin/principal/sb-admin-2.min.js"></script>
- <!-- Page level custom scripts -->
-  <script src="/js/demo/chart-area-demo.js"></script>
-  <script src="/js/demo/chart-pie-demo.js"></script>
-  <!-- Scripts Admin  -->
-   <script src="js/Admin/principal/plato.js"></script>
-   <script src="js/Admin/principal/categoria.js"></script>
-   <script src="js/Admin/principal/principal.js"></script>
-</body>
+        <!-- Core plugin JavaScript-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> 
+        <!-- Custom scripts for all pages-->
+        <script src="js/Admin/principal/sb-admin-2.min.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="/js/demo/chart-area-demo.js"></script>
+        <script src="/js/demo/chart-pie-demo.js"></script>
+        <!-- Scripts Admin  -->
+        <script src="js/Admin/principal/plato.js"></script>
+        <script src="js/Admin/principal/categoria.js"></script>
+        <script src="js/Admin/principal/adicional.js"></script>
+        <script src="js/Admin/principal/adicionales.js"></script>
+        <script src="js/Admin/principal/principal.js"></script>
+    </body>
 
 </html>

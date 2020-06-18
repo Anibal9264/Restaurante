@@ -25,7 +25,7 @@ public class Dao {
     //**************************AGREGAR********************************
     
     public void PersonaAdd(Persona p) throws Exception{
-        String sql="insert into persona (correo,nombre,apellidos,contraseña,"
+        String sql="insert into restaurante.persona (correo,nombre,apellidos,contraseña,"
                 + "telefono,isAdmin) values('%s','%s','%s','%s','%s','%s')";
         sql=String.format(sql,p.getCorreo(),p.getNombre(),p.getApellidos(),
                 p.getContraseña(),p.getTelefono(),p.toIsAdmin());
@@ -36,8 +36,8 @@ public class Dao {
      }
     
      public void AdicionalAdd(Adicional a) throws Exception{
-        String sql="insert into Adicional (detalle,precio)"+
-         " values('%s','%s','%s')";
+        String sql="insert into restaurante.adicional (detalle,precio)"+
+         " values('%s','%s')";
         sql=String.format(sql,a.getDetalle(),a.getPrecio());
         int count=db.executeUpdate(sql);
         if (count==0){
@@ -46,7 +46,7 @@ public class Dao {
      }
      
       public void AdicionalesAdd(Adicionales a) throws Exception{
-        String sql="insert into Adicionales (nombre,tipo)"+
+        String sql="insert into restaurante.adicionales (nombre,tipo)"+
          " values('%s','%s')";
         sql=String.format(sql,a.getNombre(),a.toTipo());
         int count=db.executeUpdate(sql);
@@ -56,7 +56,7 @@ public class Dao {
      }
       
        public void PlatoAdd(Plato p) throws Exception{
-        String sql="insert into Plato (nombre,detalle,precio,disponibles,"
+        String sql="insert into restaurante.plato (nombre,detalle,precio,disponibles,"
                 + "imagen) values('%s','%s','%s','%s','%s')";
         sql=String.format(sql,p.getNombre(),p.getDetalle(),p.getPrecio(),
                 p.getDisponibles(),p.getImagen());
@@ -67,14 +67,36 @@ public class Dao {
       }
         
     public void CategoriaAdd(Categoria c) throws Exception{
-        String sql="insert into Categoria (nombre)"+
-         " values('%s')";
+        String sql="insert into restaurante.Categoria (nombre) values('%s')";
         sql=String.format(sql,c.getNombre());
         int count=db.executeUpdate(sql);
+        
+        //Obtengo el id de la Categoria que acabo de agregar
+        sql="SELECT MAX(id) AS id2 FROM restaurante.categoria";
+        ResultSet rs = db.executeQuery(sql);
+        int id=0;
+        if (rs.next()) {
+        id = rs.getInt("id2");
+        }
+        for(Plato p:c.getPlatos()){
+        Categoria_plato(id,p.getId());
+        }
         if (count==0){
             throw new Exception("Categoria ya existe");
         }
      }
+    
+      public void Categoria_plato(int cat,int plato) throws Exception{
+        String sql="insert into restaurante.Categoria_Plato (Categoria,Plato)"
+         + " values('%s','%s')";
+        sql=String.format(sql,cat,plato);
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("Error");
+        }
+ }
+    
+    
         
      public void OrdenAdd(Orden o) throws Exception{
          String sql;
@@ -242,6 +264,20 @@ public class Dao {
         return resultado;
     }
     
+     public List<Adicional> ListaAdicionalL() throws Exception{
+        List<Adicional> resultado = new ArrayList<Adicional>();
+        try {
+            String sql="select * from restaurante.adicional";
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                resultado.add(AdicionalRender(rs));
+            }
+        } catch (SQLException ex) {
+        return resultado;
+        }
+        return resultado;
+    }
+    
         public List<Adicionales>ListaAdicionales(int Plato_id) throws Exception{
         List<Adicionales> resultado = new ArrayList<Adicionales>();
         try {
@@ -274,7 +310,19 @@ public class Dao {
         return resultado;
     }
     
- 
+    public List<Plato> ListaPlatos() throws Exception{
+        List<Plato> resultado = new ArrayList<Plato>();
+        try {
+            String sql="select * from restaurante.Plato ";
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+            resultado.add(PlatoRender(rs));
+            }
+        } catch (SQLException ex) {
+        return resultado;
+        }
+        return resultado;
+    }
       
     public List<Categoria> ListaCategoria() throws Exception{
         List<Categoria> resultado = new ArrayList<Categoria>();

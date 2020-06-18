@@ -1,7 +1,7 @@
 
 /* global categoria */
   function GetCategorias(){
-    $.ajax({type:"GET", url:"/Restaurante/api/categorias",contentType:"application/json"})
+    $.ajax({type:"GET", url:"api/categorias",contentType:"application/json"})
       .then((Categorias)=>{listCat(Categorias);},
              (error)=>{ alert("Error al obtener Categorias: "+error);});                          
    }

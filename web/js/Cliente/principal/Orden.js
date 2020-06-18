@@ -260,8 +260,4 @@ function hoyFecha(){
          return Orden;
  }
  
- 
- 
- function Historial(){
-     
- }
+

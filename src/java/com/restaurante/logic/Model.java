@@ -61,6 +61,30 @@ public class Model {
     public List<Orden> getOrdenes(Persona logged) throws Exception {
         return base.ListaOrdenes(logged);
     }
+
+    public void addPlato(Plato plato) throws Exception {
+     base.PlatoAdd(plato);
+    }
+
+    public List<Plato> getPlatos() throws Exception {
+     return base.ListaPlatos();
+   }
+
+    public void addCategoria(Categoria categoria) throws Exception {
+      base.CategoriaAdd(categoria);
+    }
+
+    public void addAdicional(Adicional adicional) throws Exception {
+       base.AdicionalAdd(adicional);
+    }
+
+    public void addAdicionales(Adicionales adicionales) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<Adicional> getadicionalL() throws Exception {
+      return base.ListaAdicionalL();
+    }
     
   
     
