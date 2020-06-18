@@ -7,54 +7,55 @@ and open the template in the editor.
 <html lang="en">
 
     <head>
-        <title>Login</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="/Restaurante/js/Cliente/login/login.js" ></script> 
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">   
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <link href="/Restaurante/css/Cliente/login/estilo.css" rel="stylesheet">
+        <title>LoginAdmin</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        
+        <script src="/Restaurante/js/Admin/login/login.js" ></script> 
+        
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">   
+       
+        <link href="/Restaurante/css/Admin/login/estilo.css" rel="stylesheet">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body style=" background-color: beige">
- <div class="container-fluid">
-  <div class="row no-gutter">
-      <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image">
-      </div>
-    <div class="col-md-8 col-lg-6">
-      <div class="login d-flex align-items-center py-5">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-9 col-lg-8 mx-auto">
-                <h3 class="login-heading mb-4" ><b>Gracias por preferirnos!</b></h3>
-             
-                <div class="form-label-group">
-                    <input style=" border-width: 2px; border-color: darkgray; " type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                  <label  for="inputEmail">Correo electrónico</label>
-                </div>
+   <body>
+       <div class="leyenda">
+           <img src="/Restaurante/images/PictureCuchara.png" style=" width: 60px; height: 60px">
+           La Cuchara del Chef
+           <div class="titulo"><b>ADMINISTRACIÓN</b></div> 
+       </div>    
+       <div class="container">
+           <div class="row">
+               <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                   <div class="card card-signin my-5">
+                       <div class="card-body">
+                           <h5 class="card-title text-center"><b>Iniciar Sesión</b></h5>
+                           <form class="form-signin">
+                               Correo
+                               <div class="form-label-group">
+                                   <input type="email" id="inputEmail" class="form-control" placeholder="Correo" required autofocus>
+                                   <label for="inputEmail"><img style="width: 25px; height: 25px" src="/Restaurante/images/Picture2.png"></label>
+                               </div>
+                               Contraseña
+                               <div class="form-label-group">
+                                   <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
+                                   <label  for="inputPassword"><img style="width: 30px; height: 30px" src="/Restaurante/images/Picture1.png"></label>
+                               </div> 
 
-                <div class="form-label-group">
-                  <input style=" border-width: 2px; border-color: darkgray;" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                  <label for="inputPassword">Contraseña</label>
-                </div>
+                               <div class="custom-control custom-checkbox mb-3">
 
-                <div >
-                  <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" style=" background-color: black ;"  id="login" >Continuar</button>             
-                </div>
-                <br>
-                <div >
-                  <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" style=" background-color: black ;"  id="Bregistro" >Registrar</button>             
-                </div>
-                <div id="loginErrorDiv" style="width:80%; margin: auto;"></div> 
-              <div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-hidden="true"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-    </body>
+                               </div>
+                               <button class="btn btn-lg btn-primary btn-block text-uppercase" style=" background-color: #052B4E" type="submit">Continuar</button>
+                               <button class="btn btn-lg btn-primary btn-block text-uppercase" style=" background-color: darkslategray" type="submit">Registrarse</button>
+                               <hr class="my-4">
+                           </form>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+</body>
 </html>
 

@@ -1,32 +1,69 @@
-
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 17, 2020, 12:26:47 AM
+    Author     : STACY
+*/
 :root {
   --input-padding-x: 1.5rem;
-  --input-padding-y: 0.75rem;
+  --input-padding-y: .75rem;
 }
 
-.login,
-.image {
-  min-height: 100vh;
+body {
+  background: #007bff;
+  background: linear-gradient(to right, #052B4E, #33DBEA);
+  //background: linear-gradient(to right, #07416F, #75C0FC);
 }
 
-.bg-image {
-  background-image:  url(/Restaurante/images/flyer.png);
-  background-size: cover;
-  background-position: center;
-  height: 1080px;
-  weight: 763px;
-}
-
-.login-heading {
-  font-weight: 300;
-}
-
-.btn-login {
-  font-size: 0.9rem;
-  
-  letter-spacing: 0.05rem;
-  padding: 0.75rem 1rem;
+.card-signin {
+  //background-image: url(/Restaurante/images/fondo1.png);
+  border: 0;
   border-radius: 2rem;
+  background: linear-gradient(to top, transparent, white);
+  //background-color: transparent;
+  
+}
+
+.leyenda{
+    color: whitesmoke;
+    font-family: Century;
+    margin-left: 50px;
+    margin-top: 10px;
+    font-size: 30px;
+}
+
+.leyenda > .titulo{
+     font-size: 15px ; 
+     color: black; 
+     margin-left: 125px
+}
+
+.card-signin .card-title {
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.card-signin .card-body {
+    
+  padding: 2rem;
+}
+
+.form-signin {
+   
+  width: 100%;
+}
+
+.form-signin .btn {
+  font-size: 80%;
+  border-radius: 5rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+  padding: 1rem;
+  transition: all 0.2s;
 }
 
 .form-label-group {
@@ -34,12 +71,14 @@
   margin-bottom: 1rem;
 }
 
+.form-label-group input {
+  height: auto;
+  border-radius: 2rem;
+}
+
 .form-label-group>input,
 .form-label-group>label {
   padding: var(--input-padding-y) var(--input-padding-x);
-  height: auto;
-  border-radius: 1rem;
-  color: darkgray;
 }
 
 .form-label-group>label {
@@ -51,13 +90,9 @@
   margin-bottom: 0;
   /* Override default `<label>` margin */
   line-height: 1.5;
-  color: grey;
-  cursor: text;
-  /* Match the input under the label */
+  color: #495057;
   border: 1px solid transparent;
-  
   border-radius: .25rem;
-
   transition: all .1s ease-in-out;
 }
 
@@ -90,8 +125,14 @@
   padding-top: calc(var(--input-padding-y) / 3);
   padding-bottom: calc(var(--input-padding-y) / 3);
   font-size: 12px;
-  color: grey;
+  color: #777;
 }
+
+.btn-google {
+  color: white;
+  background-color: #ea4335;
+}
+
 
 /* Fallback for Edge
 -------------------------------------------------- */
