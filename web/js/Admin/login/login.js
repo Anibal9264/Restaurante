@@ -6,13 +6,15 @@
 
 window.existeP;
 
- function onloaded(){
-  $("#login").on("click",()=>{Login();});   
-  $("#Bregistro").on("click",()=>{RegistroShow();});
-  $("#R_envio").on("click",()=>{AddUser();});
+
+
+ function loaded(){
+  $("#loginAd").on("click",()=>{Login();});   
+  
   existeP = null;
  }
-
+ 
+$(loaded);
 
 function CargarDatosCliente(){
      var cliente = $.parseJSON(sessionStorage.getItem('cliente'));
@@ -20,7 +22,7 @@ function CargarDatosCliente(){
      nom.html(cliente.nombre+" "+cliente.apellidos);
      $('#Logout').removeClass("hide");
      $('#histo').removeClass("hide");
-     $('#Login').off("click");
+     $('#Login').off("click"); 
 }
 
 function quitarDatos(){
@@ -39,16 +41,18 @@ function cargarlogin(){
       onloaded();
      },700);   
 }
+//
+//function RegistroShow(){                  //mostrar 
+//    $("#R_email").attr("placeholder","tucorreo@example.com");
+//    $("#R_email").removeClass("is-invalid");
+//    $("#R_email").removeClass("is-valid");
+//    $('#modalRegistro').modal("show");
+//    $("#R_email").on("change",()=>{verificar();});
+//}
 
-function RegistroShow(){
-    $("#R_email").attr("placeholder","tucorreo@example.com");
-    $("#R_email").removeClass("is-invalid");
-    $("#R_email").removeClass("is-valid");
-    $('#modalRegistro').modal("show");
-    $("#R_email").on("change",()=>{verificar();});
-}
 
-function verificar(){
+
+function verificar(){       //para el registrar, si el correo ya existe entonces no me deja registrar otro
     existeP = null;
     existe();
     if(!existeP){
@@ -62,7 +66,7 @@ function existe(){
      correo:$("#R_email").val().toLowerCase()
    };
     $.ajax({type:"POST", url:"api/login/get",
-                data: JSON.stringify(persona),contentType: "application/json"})
+                data: JSON.stringify(persona),contentType: "application/json"}) //JSON.stringify(persona) aqui le paso la funcion Rest java
       .then((persona)=>{if(persona){existeP = persona;
            $("#R_email").removeClass("is-valid");
            $("#R_email").addClass("is-invalid");  
@@ -73,40 +77,42 @@ function existe(){
         }});  
 }
 
-function  AddUser(){
-    
-     persona={
-          nombre:$("#R_nombre").val(),
-          apellidos:$("#R_apellidos").val(),
-          telefono:$("#R_telefono").val(),
-          correo:$("#R_email").val(),
-          contraseña:$("#R_contra").val()
-       };
-      if (persona.nombre.length === 0 ||
-      persona.apellidos.length === 0 ||
-      persona.telefono.length === 0 ||
-      persona.correo.length === 0 ||
-      persona.contraseña.length === 0
-      ){
-      alert("No puede haber campos vacios");
-    } else {
-      $.ajax({type:"POST", url:"api/login/add",
-       data: JSON.stringify(persona),contentType: "application/json"})
-      .then((persona)=>{persona.correo="";CargarCliente(persona);},
-      (error)=>{errorMessage(error.status,$("#loginErrorDiv"));});
-     }
-      
-       
-        
-}
+//function  AddUser(){
+//    
+//     persona={
+//          nombre:$("#R_nombre").val(),
+//          apellidos:$("#R_apellidos").val(),
+//          telefono:$("#R_telefono").val(),
+//          correo:$("#R_email").val(),
+//          contraseña:$("#R_contra").val()
+//       };
+//      if (persona.nombre.length === 0 ||
+//      persona.apellidos.length === 0 ||
+//      persona.telefono.length === 0 ||
+//      persona.correo.length === 0 ||
+//      persona.contraseña.length === 0
+//      ){
+//      alert("No puede haber campos vacios");
+//    } else {
+//      $.ajax({type:"POST", url:"api/login/add",
+//       data: JSON.stringify(persona),contentType: "application/json"})
+//      .then((persona)=>{persona.correo="";CargarCliente(persona);},
+//      (error)=>{errorMessage(error.status,$("#loginErrorDiv"));});
+//     }
+//      
+//       
+//        
+//}
 
 
 function Login(){
+   
    if(!validar()) return; 
    persona={
      correo:$("#inputEmail").val().toLowerCase(),
      contraseña:$("#inputPassword").val()
    };
+   
    $.ajax({type: "POST", url:"api/login",
                 data: JSON.stringify(persona),contentType: "application/json"})
       .then((persona)=>{persona.correo="";CargarCliente(persona);},
@@ -115,7 +121,7 @@ function Login(){
 
 function CargarCliente(persona){
   sessionStorage.setItem('cliente',JSON.stringify(persona));
-  window.location.href = "view.html";
+  window.location.href = "index2.html";
 }
 
 

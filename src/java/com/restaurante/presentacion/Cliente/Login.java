@@ -43,8 +43,8 @@ public class Login {
     
     @POST
     @Path("/get")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)    
+    @Consumes(MediaType.APPLICATION_JSON)    //recibiendo del js
+    @Produces(MediaType.APPLICATION_JSON)    //para enviar 
     public Persona Get(Persona cliente) {  
         Persona logged=null;
         try {

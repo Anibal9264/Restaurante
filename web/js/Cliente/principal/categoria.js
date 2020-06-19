@@ -2,7 +2,7 @@
 /* global categoria */
   function GetCategorias(){
     $.ajax({type:"GET", url:"api/categorias",contentType:"application/json"})
-      .then((Categorias)=>{listCat(Categorias);},
+      .then((Categorias)=>{ listCat(Categorias);},   //alert(JSON.stringify(Categorias)) ;
              (error)=>{ alert("Error al obtener Categorias: "+error);});                          
    }
    
