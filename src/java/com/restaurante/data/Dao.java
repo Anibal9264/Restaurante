@@ -53,7 +53,26 @@ public class Dao {
         if (count==0){
             throw new Exception("Adicionales ya existe");
         }
+        sql="SELECT MAX(id) AS id2 FROM restaurante.adicionales";
+        ResultSet rs = db.executeQuery(sql);
+        int id=0;
+        if (rs.next()) {
+        id = rs.getInt("id2");
+        }
+        for(Adicional ad:a.getListAdicionales()){
+        Adicionales_Adicional(id,ad.getId());
+        }
      }
+      
+    public void Adicionales_Adicional(int ads,int ad) throws Exception{
+        String sql="insert into restaurante.adicionales_adicional (Adicionales,Adicional)"
+         + " values('%s','%s')";
+        sql=String.format(sql,ads,ad);
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("Error");
+        }
+ }
       
        public void PlatoAdd(Plato p) throws Exception{
         String sql="insert into restaurante.plato (nombre,detalle,precio,disponibles,"
@@ -64,7 +83,27 @@ public class Dao {
         if (count==0){
             throw new Exception("Plato ya existe");
         }
+        
+        sql="SELECT MAX(id) AS id2 FROM restaurante.plato";
+        ResultSet rs = db.executeQuery(sql);
+        int id=0;
+        if (rs.next()) {
+        id = rs.getInt("id2");
+        }
+        for(Adicionales a:p.getAdicionales()){
+        plato_adicionales(id,a.getId());
+        }
       }
+       
+     public void plato_adicionales(int plato,int ad) throws Exception{
+        String sql="insert into restaurante.Plato_Adicionales (Plato,Adicionales)"
+         + " values('%s','%s')";
+        sql=String.format(sql,plato,ad);
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("Error");
+        }
+ }
         
     public void CategoriaAdd(Categoria c) throws Exception{
         String sql="insert into restaurante.Categoria (nombre) values('%s')";
@@ -95,6 +134,7 @@ public class Dao {
             throw new Exception("Error");
         }
  }
+
     
     
         
@@ -271,6 +311,20 @@ public class Dao {
             ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
                 resultado.add(AdicionalRender(rs));
+            }
+        } catch (SQLException ex) {
+        return resultado;
+        }
+        return resultado;
+    }
+     
+      public List<Adicionales> ListaAdicionalesL() throws Exception{
+        List<Adicionales> resultado = new ArrayList<Adicionales>();
+        try {
+            String sql="select * from restaurante.adicionales";
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                resultado.add(AdicionalesRender(rs));
             }
         } catch (SQLException ex) {
         return resultado;

@@ -35,7 +35,7 @@ function Rowplatos(Tabl,a){
 function addAdicionalesN(){
       Adicionales={
           nombre:$('#A-nombre').val(),
-          tipo:true,
+          tipo:obtenerRadio(),
           listAdicionales:obtenerSelect()
       };
       if (Adicionales.nombre.length === 0 ||
@@ -45,17 +45,30 @@ function addAdicionalesN(){
     } else {
       $.ajax({type:"POST", url:"api/admin/adicionales",
       data: JSON.stringify(Adicionales),contentType: "application/json"});
-      window.location.href = "index2.html";
+       $("#addExito").modal("show");
+     setTimeout(
+     function() 
+     {
+       viewNAdicionales();
+     }, 2000);
      } 
   }
   
   function obtenerSelect(){
     var selects =[];
      $("input[type=checkbox]:checked").each(function() {
-         Plato={
+         Adicional={
              id:$(this).attr("id")
          };
-      selects.push(Plato);
+      selects.push(Adicional);
      }); 
      return selects;
 }
+ function obtenerRadio(){
+      var is;
+       $("input[type=radio]:checked").each(function() {
+       is = $(this).attr("id");
+       });
+       if(is===1)return true;
+           return false;
+ }

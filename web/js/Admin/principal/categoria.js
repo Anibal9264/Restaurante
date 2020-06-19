@@ -44,7 +44,12 @@ function addCategoriaN(){
     } else {
       $.ajax({type:"POST", url:"api/admin/categoria",
       data: JSON.stringify(Cetegoria),contentType: "application/json"});
-      window.location.href = "index2.html";
+     $("#addExito").modal("show");
+     setTimeout(
+     function() 
+     {
+       viewNCategoria();
+     }, 2000);
      } 
   }
   

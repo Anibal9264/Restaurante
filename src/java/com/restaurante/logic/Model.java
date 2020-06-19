@@ -78,12 +78,16 @@ public class Model {
        base.AdicionalAdd(adicional);
     }
 
-    public void addAdicionales(Adicionales adicionales) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addAdicionales(Adicionales adicionales) throws Exception {
+       base.AdicionalesAdd(adicionales);
     }
 
     public List<Adicional> getadicionalL() throws Exception {
       return base.ListaAdicionalL();
+    }
+
+    public List<Adicionales> getadicionalesL() throws Exception {
+      return base.ListaAdicionalesL();
     }
     
   

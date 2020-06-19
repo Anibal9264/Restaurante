@@ -11,3 +11,5 @@ $('#view-Adicional').on("click",()=>{viewAdicional();});
 }
 $(loaded);
 
+
+  

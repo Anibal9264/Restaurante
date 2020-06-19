@@ -3,14 +3,14 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
+           
+            
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <section class="container">
                             <h1 class="h2 text-center my-3"></h1>
                           
-                                <fieldset>
+                                
                                     <legend class="h4 text-center">
                                         Nuevo plato
                                     </legend>
@@ -37,17 +37,40 @@
                                     <div class="form-group">
                                         <img id="imgSalida" width="100%" height="90%"/> 
                                     </div>
+                                         <div class="form-group">
+                                     <label>Seleccione los adicionales y acompañamientos que puede tener este plato</label>
+                                          <ul class="list-group scrollbar scrollbar-primary">
+                                       <div class="scrollbar-cyan bordered-cyan">
+                                   <div class="card-body">
+                                    <table class="table table-bordered">
+                                           <thead>
+                                               <tr>
+                                                   <th>Nombre</th>
+                                                   <th>Tipo</th>
+                                                   <th>Adicionales</th>
+                                               </tr>
+                                           </thead>
+                                           <tbody id="T-add-P">
+                                               
+                                           </tbody>
+                                    </table>
+                                          </div>
                                     
+                                    </div>
+                                        </ul>
+                                         
+                                         </div>   
+                                       
                                     <div class="form-group text-center">
                                         <button id="P-add" class="btn btn-primary ">Agregar</button>
                                     </div>
-                                </fieldset>
+                               
                           
                         </section>
                     </div>
                 </div>
-                </tbody>
-            </table>
+               
+            
         </div>
     </div>
 </div>

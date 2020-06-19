@@ -2,7 +2,6 @@ function viewNAdicional(){
     $('#A-Contenido').load("com/Admin/principal/new-adicional.html");
     setTimeout(
 function() { 
-     CargarPlatos();
        $("#AddAdicional").on("click",()=>{addAdicionalN();});
     },300);
 }
@@ -23,7 +22,12 @@ function viewAdicional(){
     } else {
        $.ajax({type:"POST", url:"api/admin/adicional",
        data: JSON.stringify(Adicional),contentType: "application/json"});
-       window.location.href = "index2.html";
+     $("#addExito").modal("show");
+     setTimeout(
+     function() 
+     {
+       viewNAdicional();
+     }, 2000);
      }
     
   }

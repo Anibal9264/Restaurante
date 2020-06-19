@@ -77,13 +77,24 @@ public class Admin {
             throw new NotFoundException();
         }  
     } 
+    
     @POST
     @Path("/adicionales")
     @Consumes(MediaType.APPLICATION_JSON)
     public void AddAdicionales(Adicionales adicionales) {
        try {
             Model.instance().addAdicionales(adicionales);
-           
+        } catch (Exception ex) {
+            throw new NotFoundException();
+        }  
+    }
+    
+    @GET
+    @Path("/adicionales")
+    @Produces({MediaType.APPLICATION_JSON})
+    public  List<Adicionales> LAdicionales() {
+       try {
+           return Model.instance().getadicionalesL();   
         } catch (Exception ex) {
             throw new NotFoundException();
         }  
