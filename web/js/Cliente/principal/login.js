@@ -41,6 +41,7 @@ function RegistroShow(){
     $("#R_email").removeClass("is-valid");
     $('#modalRegistro').modal("show");
     $("#R_email").on("change",()=>{verificar();});
+    $("#R_email").on("keyup",()=>{verificar();});
 }
 
 function verificar(){
@@ -62,9 +63,7 @@ function existe(){
            $("#R_email").removeClass("is-valid");
            $("#R_email").addClass("is-invalid");  
            $("#R_email").val("");
-           $("#R_email").attr("placeholder",persona.correo);
-            
-           
+           $("#R_email").attr("placeholder",persona.correo); 
         }});  
 }
 

@@ -89,7 +89,22 @@ public class Model {
     public List<Adicionales> getadicionalesL() throws Exception {
       return base.ListaAdicionalesL();
     }
-    
+
+    public List<Orden> getOrdenes() throws Exception {
+      return base.ListaOrdenes();
+    }
+
+    public List<Orden> getOrdenesD() throws Exception {
+      return base.ListaOrdenesD();
+    }
+
+    public List<Orden> getOrdenesM() throws Exception {
+     return base.ListaOrdenesM();
+    }
+
+    public List<Orden> getOrdenesA() throws Exception {
+     return base.ListaOrdenesA();
+    }
   
     
   

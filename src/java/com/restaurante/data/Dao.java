@@ -163,7 +163,7 @@ public class Dao {
         if (rs.next()) {
         id = rs.getInt("id2");
         }
-        for(Orden_Plato op:o.getOrden_platos()){
+        for(Orden_Plato op :o.getOrden_platos()){
         Orden_platoADD(op,id);
         }
         if (count==0){
@@ -180,7 +180,7 @@ public class Dao {
         int count=db.executeUpdate(sql);
         
         for(Adicional adicional:op.getAdicionales()){
-             Orden_plato_Adicional(adicional.getId(),op.getPlato().getId(),orden);
+           if(adicional.getId() != 0){Orden_plato_Adicional(adicional.getId(),op.getPlato().getId(),orden);}
         }
         if (count==0){
             throw new Exception("Orden ya existe");
@@ -445,6 +445,62 @@ public class Dao {
                     + "where Persona like '%s'";
             sql=String.format(sql,logged.getCorreo());
             ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                resultado.add(getOrden(rs.getInt("id")));
+            }
+        } catch (SQLException ex) {
+        return resultado;
+        }
+        return resultado;
+    }
+    
+       public List<Orden> ListaOrdenes() throws Exception {
+    List<Orden> resultado = new ArrayList<Orden>();
+        try {
+            String sql="select * from restaurante.Orden ";
+           ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                resultado.add(getOrden(rs.getInt("id")));
+            }
+        } catch (SQLException ex) {
+        return resultado;
+        }
+        return resultado;
+    }
+       
+   public List<Orden> ListaOrdenesD() throws Exception {
+    List<Orden> resultado = new ArrayList<Orden>();
+        try {
+            String sql="select * from restaurante.Orden where day(fecha) = day(NOW()) ";
+           ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                resultado.add(getOrden(rs.getInt("id")));
+            }
+        } catch (SQLException ex) {
+        return resultado;
+        }
+        return resultado;
+    }
+           
+     public List<Orden> ListaOrdenesM() throws Exception {
+    List<Orden> resultado = new ArrayList<Orden>();
+        try {
+            String sql="select * from restaurante.Orden where month(fecha) = month(NOW()) ";
+           ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                resultado.add(getOrden(rs.getInt("id")));
+            }
+        } catch (SQLException ex) {
+        return resultado;
+        }
+        return resultado;
+    }
+               
+    public List<Orden> ListaOrdenesA() throws Exception {
+    List<Orden> resultado = new ArrayList<Orden>();
+        try {
+            String sql="select * from restaurante.Orden where year(fecha) = year(NOW())";
+           ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
                 resultado.add(getOrden(rs.getInt("id")));
             }

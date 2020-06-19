@@ -12,7 +12,7 @@ function ObtenerDatosOrden(plato){
    var  ot = obj.total;
    var t = parseFloat(ot)+parseFloat(Orden_Plato.total);
    obj.total= t;
-   obj.Orden_platos.push(Orden_Plato);
+   obj.orden_platos.push(Orden_Plato);
    ActualizarOrden(obj);
 }
 
@@ -44,13 +44,13 @@ function ActualizarOrden(obj){
 function CargarPlatosOrden(){
     var obj = $.parseJSON(sessionStorage.getItem('orden'));
     
-    if(obj.Orden_platos.length>0){
+    if(obj.orden_platos.length>0){
           var listado=$("#platosOrden");
           listado.html("");
           CargarPagoT(listado,obj);
           CargarEncabezado(listado,obj);
           var i = 0;
-          obj.Orden_platos.forEach((op)=>{rowPO(listado,op,i);i++;});
+          obj.orden_platos.forEach((op)=>{rowPO(listado,op,i);i++;});
           
     }else{
        var listado=$("#platosOrden");
@@ -69,9 +69,9 @@ function CargarEncabezado(listado,obj){
       "<label id='Lop2' class='btn btn-secondary w-50 '>"+
        "<input type='radio' name='options' autocomplete='off'> Enviar"+
        "</label>");
-    li.find("#Lop1").on("click",()=>{obj.Entrega_recoge=true;ActualizarOrden(obj);});
-    li.find("#Lop2").on("click",()=>{obj.Entrega_recoge=false;ActualizarOrden(obj);});
-    if(obj.Entrega_recoge){
+    li.find("#Lop1").on("click",()=>{obj.entrega_recoge=true;ActualizarOrden(obj);});
+    li.find("#Lop2").on("click",()=>{obj.entrega_recoge=false;ActualizarOrden(obj);});
+    if(obj.entrega_recoge){
         li.find("#Lop1").addClass("active"); 
         li.find("#Lop1").attr("checked");}
     else {li.find("#Lop2").addClass("active");
@@ -99,9 +99,9 @@ function rowPO(listado,op,i){
 }
 function SumarPlato(i,op){
        var obj = $.parseJSON(sessionStorage.getItem('orden'));
-       obj.Orden_platos[i].cantidad=parseInt(op.cantidad)+1;
+       obj.orden_platos[i].cantidad=parseInt(op.cantidad)+1;
        var precio = op.total/op.cantidad;
-       obj.Orden_platos[i].total=precio*(parseInt(op.cantidad)+1);
+       obj.orden_platos[i].total=precio*(parseInt(op.cantidad)+1);
        var  ot = obj.total;
        var t = parseFloat(ot)+parseFloat(precio);
        obj.total= t; 
@@ -111,9 +111,9 @@ function SumarPlato(i,op){
 function RestarPlato(i,op){
     if(op.cantidad>1){
        var obj = $.parseJSON(sessionStorage.getItem('orden'));
-       obj.Orden_platos[i].cantidad=op.cantidad-1;
+       obj.orden_platos[i].cantidad=op.cantidad-1;
        var precio = op.total/op.cantidad;
-       obj.Orden_platos[i].total=precio*(op.cantidad-1);
+       obj.orden_platos[i].total=precio*(op.cantidad-1);
        var  ot = obj.total;
        var t = parseFloat(ot)-parseFloat(precio);
        obj.total= t; 
@@ -123,8 +123,8 @@ function RestarPlato(i,op){
 }
 function EliminarPdeLista(i,op){
     var obj = $.parseJSON(sessionStorage.getItem('orden'));
-    obj.Orden_platos.splice(i,1);
-    if(obj.Orden_platos.length>0){
+    obj.orden_platos.splice(i,1);
+    if(obj.orden_platos.length>0){
     var  ot = obj.total;
     var t = parseFloat(ot)-parseFloat(op.total);
     obj.total= t; 
@@ -164,11 +164,11 @@ function EliminarPdeLista(i,op){
 
 function pop(cliente,orden){
   var select = $("#Ldirecciones");
-  if(!orden.Entrega_recoge){
+  if(!orden.entrega_recoge){
    select.removeClass("hide");
    $("#AddDireccion").removeClass("hide");
    $("#AddDireccion").on("click",()=>{$('#direccion-modal').modal('show');});
-    $("#AddD").on("click",()=>{$('#direccion-modal').modal('hide');
+   $("#AddD").on("click",()=>{$('#direccion-modal').modal('hide');
      addDireccion();
    });
     cliente.direcciones.forEach((d)=>{optionAdd(select,d);});  
@@ -177,11 +177,9 @@ function pop(cliente,orden){
   $("#tarjeta").on("click",()=>{orden.formaPago="Tarjeta";ActualizarOrden(orden);});
   $("#sinpe").on("click",()=>{orden.formaPago="SINPE Movil";ActualizarOrden(orden);});
   $("#Realizar").on("click",()=>{
-      if(!orden.Entrega_recoge){
+      if(!orden.entrega_recoge){
          orden.direccion=$('#Ldirecciones').find(":selected").val();    
       }
-     
-      orden.fecha = hoyFecha();
       ActualizarOrden(orden);
       RealizarYGuargarOrden();
   });
@@ -215,46 +213,34 @@ function optionAdd(select,d){
           CargarCliente(persona);}); 
  }
 
-
-function hoyFecha(){
-    
-    var hoy = new Date();
-        var dd = hoy.getDay();
-        var mm = hoy.getMonth()+1;
-        var yyyy = hoy.getFullYear();
-        var hh = hoy.getHours();
-        var mn = hoy.getMinutes();
-        var ss = hoy.getSeconds();
-        return yyyy+'-'+mm+'-'+dd+' '+hh+':'+mn+':'+ss;
-}
-
-
  function RealizarYGuargarOrden(){
       $.ajax({type: "POST", url:"api/realizar",
                 data: sessionStorage.getItem('orden'),contentType: "application/json"})
-      .then( Realizada(),(error)=>{ alert(errorMessage(error.status));});
-             
+      .then((error)=>{ alert(errorMessage(error.status));});
+       Realizada();      
  }
  
  function Realizada(){
      sessionStorage.setItem('orden',JSON.stringify(OrdenRender()));
+     $("#add-modal2").modal("hide");
      $("#comparRealizada").modal("show");
+     CargarPlatosOrden();
      setTimeout(
      function() 
      {
-      window.location.href = "index.html";
+      $("#comparRealizada").modal("hide");
      }, 2000);
  }
  
  function OrdenRender(){
      Orden={
              total: 0.0,
-             Entrega_recoge:true,
+             entrega_recoge:true,
              fecha:"",
              estado:0,
              cliente:"",
              direccion:"",
-             Orden_platos:[],
+             orden_platos:[],
              formaPago:"Efectivo"             
          };
          return Orden;

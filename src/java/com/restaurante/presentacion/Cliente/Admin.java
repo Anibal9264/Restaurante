@@ -5,6 +5,7 @@ import com.restaurante.logic.Adicional;
 import com.restaurante.logic.Adicionales;
 import com.restaurante.logic.Categoria;
 import com.restaurante.logic.Model;
+import com.restaurante.logic.Orden;
 import com.restaurante.logic.Plato;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -100,4 +101,49 @@ public class Admin {
         }  
     }
     
+    
+    @GET
+    @Path("/ordenes")
+    @Produces(MediaType.APPLICATION_JSON) 
+    public List<Orden> GetOrdenes (){
+        try {  
+            return Model.instance().getOrdenes();
+        } catch (Exception ex) {
+             throw new NotFoundException();
+        }
+    }
+    
+    
+    @GET
+    @Path("/ordenesDia")
+    @Produces(MediaType.APPLICATION_JSON) 
+    public List<Orden> GetOrdenesD (){
+        try {  
+            return Model.instance().getOrdenesD();
+        } catch (Exception ex) {
+             throw new NotFoundException();
+        }
+    }
+    
+    @GET
+    @Path("/ordenesMes")
+    @Produces(MediaType.APPLICATION_JSON) 
+    public List<Orden> GetOrdenesM (){
+        try {  
+            return Model.instance().getOrdenesM();
+        } catch (Exception ex) {
+             throw new NotFoundException();
+        }
+    }
+    
+    @GET
+    @Path("/ordenesAño")
+    @Produces(MediaType.APPLICATION_JSON) 
+    public List<Orden> GetOrdenesA (){
+        try {  
+            return Model.instance().getOrdenesA();
+        } catch (Exception ex) {
+             throw new NotFoundException();
+        }
+    }
 }

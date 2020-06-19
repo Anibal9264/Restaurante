@@ -13,7 +13,7 @@ public class Orden {
    private int estado; // 1 : recivida o enviada 2: Preparacion 3: Lista
    private String cliente;
    private String direccion;
-   private List<Orden_Plato> Orden_platos;
+   private List<Orden_Plato> orden_platos;
    private String formaPago;
 
     public Orden(int id, Double total, boolean Entrega_recoge, String fecha, int estado, String cliente, String direccion, List<Orden_Plato> Orden_platos, String formaPago) {
@@ -24,7 +24,7 @@ public class Orden {
         this.estado = estado;
         this.cliente = cliente;
         this.direccion = direccion;
-        this.Orden_platos = Orden_platos;
+        this.orden_platos = Orden_platos;
         this.formaPago = formaPago;
     }
 
@@ -36,7 +36,7 @@ public class Orden {
         this.estado = 0;
         this.cliente = "";
         this.direccion = "";
-        this.Orden_platos = new ArrayList();
+        this.orden_platos = new ArrayList();
         this.formaPago = "";
     }
 
@@ -97,11 +97,11 @@ public class Orden {
     }
 
     public List<Orden_Plato> getOrden_platos() {
-        return Orden_platos;
+        return orden_platos;
     }
 
     public void setOrden_platos(List<Orden_Plato> Orden_platos) {
-        this.Orden_platos = Orden_platos;
+        this.orden_platos = Orden_platos;
     }
 
     public String getFormaPago() {
