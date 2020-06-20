@@ -21,13 +21,19 @@ function viewAdicional(){
       alert("No puede haber campos vacios");
     } else {
        $.ajax({type:"POST", url:"api/admin/adicional",
-       data: JSON.stringify(Adicional),contentType: "application/json"});
-     $("#addExito").modal("show");
+       data: JSON.stringify(Adicional),contentType: "application/json"})
+     .then( ()=>{adicionalSuccessA();},
+       (error)=>{ errorMessage(error.status,$("#ErrorDiv"));}); 
+     }
+    
+  }
+  
+  function adicionalSuccessA(){
+      $("#addExito").modal("show");
      setTimeout(
      function() 
      {
        viewNAdicional();
-     }, 2000);
-     }
-    
+       $("#addExito").modal("hide");
+     }, 2000); 
   }

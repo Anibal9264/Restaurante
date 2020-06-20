@@ -28,7 +28,7 @@ public class Historial {
     public List<Orden> Get (){
     Persona logged=null;
         HttpSession session = request.getSession(true);
-        logged = (Persona) session.getAttribute("persona");
+        logged = (Persona) session.getAttribute("usuario");
         try {  
             return Model.instance().getOrdenes(logged);
         } catch (Exception ex) {

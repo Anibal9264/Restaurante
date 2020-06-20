@@ -18,7 +18,7 @@ function viewPlatos(){
 function CargarAdicionales(){
  $.ajax({type:"GET", url:"api/admin/adicionales",contentType:"application/json"})
       .then((Adicionales)=>{listAds(Adicionales);},
-             (error)=>{ alert("Error al obtener adicionales: "+error);});      
+             (error)=>{ errorMessage(error.status,$("#ErrorDiv"));});      
 }
 function listAds(Adicionales){
     
@@ -112,15 +112,19 @@ function rowPlatos(Tabl,p){
       alert("No puede haber campos vacios");
     } else {
       $.ajax({type:"POST", url:"api/admin/plato",
-       data: JSON.stringify(Plato),contentType: "application/json"});
-        $("#addExito").modal("show");
+       data: JSON.stringify(Plato),contentType: "application/json"})
+   .then( ()=>{PlatoSuccessA();},
+     (error)=>{ errorMessage(error.status,$("#ErrorDiv"));}); 
+  }
+  
+  function PlatoSuccessA(){
+     $("#addExito").modal("show");
      setTimeout(
      function() 
      {
        viewNPlato();
      }, 2000);
-     }
-    
+     } 
   }
   
     function obtenerSelect(){

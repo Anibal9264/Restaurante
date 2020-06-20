@@ -631,6 +631,19 @@ public class Dao {
     }
 
     
+    
+    
+    
+    public void UpdateEstadoOrden(Orden orden) throws Exception {
+     String sql="update restaurante.orden set estado='%s' where id='%s'";
+        sql=String.format(sql,orden.getEstado(),orden.getId());
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception(" NO UPDATE");
+        }
+    }
+
+   
 
    
      

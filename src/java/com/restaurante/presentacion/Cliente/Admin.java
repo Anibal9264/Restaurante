@@ -146,4 +146,14 @@ public class Admin {
              throw new NotFoundException();
         }
     }
+   @POST
+    @Path("/orden")
+    @Consumes(MediaType.APPLICATION_JSON)
+     public void OrdenEstado(Orden orden) {
+       try {
+            Model.instance().OrdenEstado(orden);
+        } catch (Exception ex) {
+            throw new NotFoundException();
+        }  
+    }
 }

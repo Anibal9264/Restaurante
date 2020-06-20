@@ -105,6 +105,10 @@ public class Model {
     public List<Orden> getOrdenesA() throws Exception {
      return base.ListaOrdenesA();
     }
+
+    public void OrdenEstado(Orden orden) throws Exception {
+     base.UpdateEstadoOrden(orden);
+    }
   
     
   

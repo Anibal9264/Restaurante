@@ -37,13 +37,24 @@
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i><img src="/Restaurante/images/restaurante.png" style=" width: 50px; height: 50px"> </i>
                     </div>
-                    <div class="sidebar-brand-text mx-3">Nombre</div>
                 </a>
 
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
 
                 <!-- Nav Item - Dashboard -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed"  data-toggle="collapse" data-target="#menu-admin" aria-expanded="true" aria-controls="menu-admin">
+                        <span id="nomb"></span>
+                    </a>
+                    <div id="menu-admin" class="collapse" aria-labelledby="menu-admin" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Menú:</h6>
+                            <a class="collapse-item" href="#"  id="Logout">Logout</a>
+                            <a class="collapse-item" href="#"  id="editA">Edit</a> 
+                        </div>
+                    </div>
+                </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="index2.html"  id="P-estadistica">
                         <i class="tachometer-alt"></i>
@@ -60,8 +71,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu-plato" aria-expanded="true" aria-controls="menu-plato">
-
-                        <span>Platos</span>
+                      <span>Platos</span>
                     </a>
                     <div id="menu-plato" class="collapse" aria-labelledby="menu-plato" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
@@ -221,6 +231,20 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="modal fade" id="msjerror" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ErrorDiv"></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal fade" id="MostrarOrden" tabindex="-1" role="dialog" aria-hidden="true">
+
+                    </div>   
                 </div>
                 <!-- End of Main Content -->
     
@@ -254,6 +278,7 @@
         <script src="/js/demo/chart-area-demo.js"></script>
         <script src="/js/demo/chart-pie-demo.js"></script>
         <!-- Scripts Admin  -->
+        <script src="js/Admin/principal/login.js"></script>
         <script src="js/Admin/principal/plato.js"></script>
         <script src="js/Admin/principal/categoria.js"></script>
         <script src="js/Admin/principal/adicional.js"></script>
