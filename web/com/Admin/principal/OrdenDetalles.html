@@ -1,0 +1,75 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+        <h1 class="h2 text-center my-3">Detalles de Orden</h1>
+
+
+        <div class="modal-body">
+            <div class="form-group row ">
+                <label>Cliente:</label> 
+                <div style="width: 12%"> </div>
+                <input type="text" id="D_cliente" class="form-control w-50" disabled>
+            </div>
+            <div class="form-group row">
+                <label>Fecha:</label>
+                <div style="width: 13%"> </div>
+                <input type="text" id="D_fecha" class="form-control w-50" disabled>
+            </div>
+            <div class="form-group row">
+                <label>Estado:</label>
+                <div style="width: 12%"> </div>
+               <select id="D_estado" class="form-control w-25">
+               <option id="e-0" value="0">Preparacion</option>
+               <option id="e-1"  value="1">Listo</option>
+               <option id="e-2"  value="2">Entregado</option>
+               </select>
+                <button class="btn btn-primary text-nowrap" type="button" id="Cambiar">
+                 Actualizar
+               </button>
+            </div>
+            <div class="form-group row">
+                <label>Tipo:</label>
+                <div style="width: 14%"> </div>
+                <input type="text" id="D_tipo" class="form-control w-50" disabled>
+            </div>
+            <div class="form-group row">
+                <label>Forma de Pago:</label>
+                <div style="width: 5%"> </div>
+                <input type="text" id="D_fp" class="form-control w-50" disabled>
+            </div>
+            <div class="form-group row">
+                <label>Total:</label>
+                <div style="width: 14%"> </div>       
+                <input type="text"  id="D_total" class="form-control w-50" disabled >
+            </div>
+
+            <ul class="list-group scrollbar scrollbar-primary"  >
+                <div class="scrollbar-cyan bordered-cyan">
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Plato</th>
+                                    <th>Cantidad</th>
+                                    <th>Detalle</th>
+                                    <th>Adicionales</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="D_table">
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </ul>
+
+
+            <div class="form-group text-center">
+                <button id="R_envio" class="btn btn-secondary "> Registrarse</button>
+            </div>
+        </div>
+
+    </div>
+</div>

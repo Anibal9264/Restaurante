@@ -32,9 +32,8 @@ public class Realizar {
     Gson gson = new Gson();
     Orden orden = gson.fromJson(data,Orden.class);
     HttpSession session = request.getSession(true);
-    Persona p = (Persona) session.getAttribute("persona");
+    Persona p = (Persona) session.getAttribute("usuario");
         try {
-            
             orden.setCliente(p.getCorreo());
             orden.setFecha(objSDF.format(fecha));
             Model.instance().addOrden(orden);

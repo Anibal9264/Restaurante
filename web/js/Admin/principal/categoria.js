@@ -14,7 +14,7 @@ function viewCategorias(){
 function CargarPlatos(){
  $.ajax({type:"GET", url:"api/admin/plato",contentType:"application/json"})
       .then((Platos)=>{listP(Platos);},
-             (error)=>{ alert("Error al obtener Categorias: "+error);});      
+             (error)=>{errorMessage(error.status,$("#ErrorDiv"));});      
 }
 function listP(Platos){
     var Tabl = $('#T-add-cat');
@@ -43,14 +43,21 @@ function addCategoriaN(){
       alert("No puede haber campos vacios");
     } else {
       $.ajax({type:"POST", url:"api/admin/categoria",
-      data: JSON.stringify(Cetegoria),contentType: "application/json"});
+      data: JSON.stringify(Cetegoria),contentType: "application/json"})
+     .then( ()=>{categoriaSuccessA();},
+      (error)=>{ errorMessage(error.status,$("#ErrorDiv"));});
+     
+  }
+  
+  function categoriaSuccessA(){
      $("#addExito").modal("show");
      setTimeout(
      function() 
      {
        viewNCategoria();
+       $("#addExito").modal("hide");
      }, 2000);
-     } 
+     }  
   }
   
   function obtenerPSelect(){

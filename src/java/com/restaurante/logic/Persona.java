@@ -97,8 +97,8 @@ public class Persona {
         return 0;
     }
  
- 
- 
- 
- 
+  public String getRol() {
+        if(isAdmin) return "ADM";
+        return "CLI";
+    }
 }

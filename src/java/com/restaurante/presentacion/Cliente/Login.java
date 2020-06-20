@@ -23,19 +23,16 @@ public class Login {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)    
-    public Persona login(Persona cliente) {  
+    public Persona login(Persona usuario) {  
         Persona logged=null;
         try {
-            logged=Model.instance().get(cliente);
+            logged=Model.instance().get(usuario);
          
-            if(!logged.getContraseña().equals(cliente.getContraseña())){
+            if(!logged.getContraseña().equals(usuario.getContraseña())){
                 throw new Exception("Clave incorrecta");
             }
-            HttpSession session = request.getSession(true);
-            session.setAttribute("persona",logged);
-            logged.setContraseña("");
-            
-            return logged;
+            request.getSession(true).setAttribute("usuario", logged);
+            return Personalimpia(logged);
         } catch (Exception ex) {
             throw new NotFoundException();
         }  
@@ -49,8 +46,7 @@ public class Login {
         Persona logged=null;
         try {
             logged=Model.instance().get(cliente);
-            logged.setContraseña("");
-            return logged;
+            return Personalimpia(logged);
         } catch (Exception ex) {
             throw new NotFoundException();
         }  
@@ -70,22 +66,27 @@ public class Login {
             logged=Model.instance().get(cliente);
             HttpSession session = request.getSession(true);
             session.setAttribute("persona",logged);
-            logged.setContraseña("");
-            return logged;
+            return Personalimpia(logged);
         } catch (Exception ex) {
             throw new NotFoundException();
         }  
     }
     
-    @DELETE 
+@DELETE 
     public void logout() {  
         HttpSession session = request.getSession(true);
-        session.removeAttribute("persona");           
+        session.removeAttribute("usuario");           
         session.invalidate();
     }
-    
    
-    
-    
+    private Persona Personalimpia(Persona p){
+         Persona pn = new Persona();
+         pn.setNombre(p.getNombre());
+         pn.setApellidos(p.getApellidos());
+         pn.setDirecciones(p.getDirecciones());
+         return pn;
+    }
     
 }
+
+ 

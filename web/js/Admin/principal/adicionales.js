@@ -15,7 +15,7 @@ function viewAdicionales(){
 function CargarAdicionalL(){
  $.ajax({type:"GET", url:"api/admin/adicional",contentType:"application/json"})
       .then((AdicionalL)=>{listA(AdicionalL);},
-             (error)=>{ alert("Error al obtener Categorias: "+error);});      
+             (error)=>{ errorMessage(error.status,$("#ErrorDiv"));});      
 }
 function listA(AdicionalL){
     var Tabl = $('#T-add-A');
@@ -44,14 +44,20 @@ function addAdicionalesN(){
       alert("No puede haber campos vacios");
     } else {
       $.ajax({type:"POST", url:"api/admin/adicionales",
-      data: JSON.stringify(Adicionales),contentType: "application/json"});
-       $("#addExito").modal("show");
+      data: JSON.stringify(Adicionales),contentType: "application/json"})
+     .then( ()=>{AdicionalesSuccessA();},
+     (error)=>{ errorMessage(error.status,$("#ErrorDiv"));});
+     } 
+  }
+  
+  function AdicionalesSuccessA(){
+     $("#addExito").modal("show");
      setTimeout(
      function() 
      {
        viewNAdicionales();
-     }, 2000);
-     } 
+       $("#addExito").modal("hide");
+     }, 2000); 
   }
   
   function obtenerSelect(){

@@ -11,7 +11,7 @@ window.existeP;
 
 function CargarDatosCliente(){
      var cliente = $.parseJSON(sessionStorage.getItem('cliente'));
-     var nom=$("#Login");
+     var nom=$("#nomb");
      nom.html(cliente.nombre+" "+cliente.apellidos);
      $('#Logout').removeClass("hide");
      $('#histo').removeClass("hide");
