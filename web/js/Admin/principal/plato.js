@@ -12,6 +12,8 @@ function() {
 }
 function viewPlatos(){
     $('#A-Contenido').load("com/Admin/principal/lista-platos.html");
+
+    cargaPlatos();
 }
 function CargarAdicionales(){
  $.ajax({type:"GET", url:"api/admin/adicionales",contentType:"application/json"})
@@ -50,8 +52,28 @@ function renderTipo(t){
      td.append(span);    
  }
 
+/////////////////////
 
 
+function cargaPlatos(){
+ $.ajax({type:"GET", url:"api/admin/plato",contentType:"application/json"})
+      .then((Platos)=>{listarPlatos(Platos);},
+             (error)=>{ alert("Error: "+error);});      
+}
+function listarPlatos(Platos){
+    var Tabl = $('#listaPla');
+    Platos.forEach( (p)=>{rowPlatos(Tabl,p);});
+}
+function rowPlatos(Tabl,p){
+  var tr = $("<tr>");
+  var tr2 = $("<tr>");
+  tr.html(
+ "<td>"+p.nombre+"</td>" + "<td>"+p.detalle+"</td>"+"<td>"+p.precio+"</td>"+
+ "<td>"+p.disponibles+"</td>"+tr2.html(listAds(p.adicionales))
+ );
+  Tabl.append(tr);                                                                                                                        
+}
+//////////////////////////
 
 
 
