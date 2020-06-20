@@ -109,6 +109,14 @@ public class Model {
     public void OrdenEstado(Orden orden) throws Exception {
      base.UpdateEstadoOrden(orden);
     }
+
+    public List<Orden> getOrdenesPendientes() throws Exception {
+    return base.ListaOrdenesPendientes();
+    }
+
+    public List<Orden_Plato> getPlatosMas() throws Exception {
+      return base.PlatosMasvendidos();
+    }
   
     
   
