@@ -1,4 +1,4 @@
-/* global result*/
+ /* global result*/
 
 function viewNPlato(){
 $('#A-Contenido').load("com/Admin/principal/new-plato.html");
@@ -66,9 +66,10 @@ function listarPlatos(Platos){
 }
 function rowPlatos(Tabl,p){
   var tr = $("<tr>");
-  //var tr2 = $("<tr>");
   tr.html(
- "<td>"+p.nombre+"</td>" + "<td>"+p.detalle+"</td>"+"<td>"+p.precio+"</td>"+
+ "<td>"+p.nombre+"</td>" + 
+ "<td>"+p.detalle+"</td>"+
+ "<td>"+p.precio+"</td>"+
  "<td>"+p.disponibles+"</td>"
  );
   Tabl.append(tr);                                                                                                                        

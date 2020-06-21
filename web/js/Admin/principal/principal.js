@@ -19,6 +19,6 @@ function CargarDatosdelAdmin(){
      var admin = $.parseJSON(sessionStorage.getItem('Admin'));
      var nom=$("#nomb");
      nom.html(admin.nombre+" "+admin.apellidos);
-     $('#Logout').on("click",()=>{Logout();});
+     $('#Logout').on("click",()=>{LogoutAd();});
 }
   
