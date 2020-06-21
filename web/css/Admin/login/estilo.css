@@ -15,15 +15,13 @@ and open the template in the editor.
 body {
   background: #007bff;
   background: linear-gradient(to right, #052B4E, #33DBEA);
-  //background: linear-gradient(to right, #07416F, #75C0FC);
 }
 
 .card-signin {
-  //background-image: url(/Restaurante/images/fondo1.png);
+
   border: 0;
   border-radius: 2rem;
   background: linear-gradient(to top, transparent, white);
-  //background-color: transparent;
   
 }
 
