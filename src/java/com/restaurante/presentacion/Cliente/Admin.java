@@ -6,6 +6,7 @@ import com.restaurante.logic.Adicionales;
 import com.restaurante.logic.Categoria;
 import com.restaurante.logic.Model;
 import com.restaurante.logic.Orden;
+import com.restaurante.logic.Orden_Plato;
 import com.restaurante.logic.Plato;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -108,6 +109,28 @@ public class Admin {
     public List<Orden> GetOrdenes (){
         try {  
             return Model.instance().getOrdenes();
+        } catch (Exception ex) {
+             throw new NotFoundException();
+        }
+    }
+    
+      @GET
+    @Path("/ordenesP")
+    @Produces(MediaType.APPLICATION_JSON) 
+    public List<Orden> GetOrdenesPendientes (){
+        try {  
+            return Model.instance().getOrdenesPendientes();
+        } catch (Exception ex) {
+             throw new NotFoundException();
+        }
+    }
+    
+    @GET
+    @Path("/ordenPMas")
+    @Produces(MediaType.APPLICATION_JSON) 
+    public List<Orden_Plato> getPlatosmas (){
+        try {  
+            return Model.instance().getPlatosMas();
         } catch (Exception ex) {
              throw new NotFoundException();
         }

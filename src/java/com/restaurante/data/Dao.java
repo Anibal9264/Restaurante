@@ -406,6 +406,25 @@ public class Dao {
         }
         return resultado;
     }
+        
+        public List<Orden_Plato> PlatosMasvendidos() throws Exception{
+        List<Orden_Plato> resultado = new ArrayList<Orden_Plato>();
+        try {
+            String sql="SELECT Plato,sum(cantidad) as cantidad " +
+            "FROM restaurante.orden_plato group by Plato order by sum(cantidad) desc;";
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+            resultado.add(RenderOrden_PlatoMas(rs));
+            }
+        } catch (SQLException ex) {
+        return resultado;
+        }
+        return resultado;
+    }
+        
+        
+        
+        
          
      private List<Adicional> getAdicionalXOrden_plato(ResultSet d) throws Exception {
       List<Adicional> resultado = new ArrayList<Adicional>();
@@ -442,7 +461,7 @@ public class Dao {
     List<Orden> resultado = new ArrayList<Orden>();
         try {
             String sql="select * from restaurante.Orden "
-                    + "where Persona like '%s'";
+                    + "where Persona like '%s' ORDER BY fecha DESC";
             sql=String.format(sql,logged.getCorreo());
             ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
@@ -454,10 +473,24 @@ public class Dao {
         return resultado;
     }
     
-       public List<Orden> ListaOrdenes() throws Exception {
+   public List<Orden> ListaOrdenes() throws Exception {
     List<Orden> resultado = new ArrayList<Orden>();
         try {
-            String sql="select * from restaurante.Orden ";
+            String sql="select * from restaurante.Orden ORDER BY fecha DESC";
+           ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                resultado.add(getOrden(rs.getInt("id")));
+            }
+        } catch (SQLException ex) {
+        return resultado;
+        }
+        return resultado;
+    }
+   
+      public List<Orden> ListaOrdenesPendientes() throws Exception {
+    List<Orden> resultado = new ArrayList<Orden>();
+        try {
+            String sql="select * from restaurante.Orden where estado != 2 ORDER BY fecha DESC";
            ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
                 resultado.add(getOrden(rs.getInt("id")));
@@ -630,7 +663,16 @@ public class Dao {
         }
     }
 
-    
+     private Orden_Plato RenderOrden_PlatoMas(ResultSet rs) throws Exception {
+          Orden_Plato op = new Orden_Plato();
+            try {
+                op.setPlato(getPlato(rs.getInt("Plato")));
+                op.setCantidad(rs.getInt("cantidad"));
+                return op;
+           } catch (SQLException ex) {
+            return null;
+        }
+    }
     
     
     

@@ -7,17 +7,17 @@ function Ordenesshow(){
 }
 function ObtenerOrdenes(){
      $.ajax({type: "GET", url:"api/admin/ordenes",contentType: "application/json"})
-      .then((Ordenes)=>{CargarRows(Ordenes);},(error)=>{errorMessage(error.status,$("#ErrorDiv"));});    
+      .then((Ordenes)=>{CargarRows(Ordenes,true);},(error)=>{errorMessage(error.status,$("#ErrorDiv"));});    
 }
 
-function CargarRows(Ordenes){
+function CargarRows(Ordenes,n){
    
      var Tbody =$("#rows");
      Tbody.html("");
-     Ordenes.forEach((O)=>{rowO(Tbody,O);});
+     Ordenes.forEach((O)=>{rowO(Tbody,O,n);});
 }
 
-function rowO(Tbody,O){
+function rowO(Tbody,O,n){
      var tr =$("<tr>");
      var td = $("<td>");
      O.orden_platos.forEach((OP)=>{Rowplato(td,OP);});
@@ -28,11 +28,11 @@ function rowO(Tbody,O){
              "<td>"+O.formaPago+"</td>"+
              "<td>"+O.total+"</td>");
      tr.append(td);
-     tr.find('td').on("click",()=>{MostrarDetallado(O);});
+     tr.find('td').on("click",()=>{MostrarDetallado(O,n);});
      Tbody.append(tr);  
 }
 
-function MostrarDetallado(O){
+function MostrarDetallado(O,n){
    var Tbody =$("#D_table");
    Tbody.html("");
    $("#D_cliente").val(O.cliente);
@@ -43,7 +43,7 @@ function MostrarDetallado(O){
    $("#D_fp").val(O.formaPago);
    $("#D_total").val("₡"+O.total);
    $("#Cambiar").off("click");
-   $("#Cambiar").on("click",()=>{cambiarestado(O);});
+   $("#Cambiar").on("click",()=>{cambiarestado(O,n);});
    $("#MostrarOrden").modal("show");
 }
 
@@ -55,20 +55,23 @@ function CargarEstado(estado){
      if(estado===2) $("#e-2").attr('selected', 'selected');       
 }
 
-function cambiarestado(Orden){
+function cambiarestado(Orden,n){
    var estaddoN = $('#D_estado').find(":selected").val();
    $('#Cambiar').html("");
    $('#Cambiar').html("<span class='spinner-border spinner-border-sm mr-2'></span>Actulizando..");
    Orden.estado=estaddoN;
     $.ajax({type:"POST", url:"api/admin/orden",
        data: JSON.stringify(Orden),contentType: "application/json"})
-   .then( ()=>{UpdateSuccess();},
+   .then( ()=>{UpdateSuccess(n);},
      (error)=>{ errorMessage(error.status,$("#ErrorDiv"));});              
 }
  
-function UpdateSuccess(){
+function UpdateSuccess(n){
  $('#Cambiar').html("Actulizado!!");
- setTimeout(function(){$('#Cambiar').html("Actualizar");ObtenerOrdenes();},500);    
+ setTimeout(function(){$('#Cambiar').html("Actualizar");
+     if(n){ObtenerOrdenes();}
+     else{ObtenerOrdenesP();}
+ },500);    
 }
 
 

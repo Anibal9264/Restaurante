@@ -2,7 +2,7 @@ function viewNCategoria(){
     $('#A-Contenido').load("com/Admin/principal/new-categoria.html");
     setTimeout(
 function() { 
-     CargarPlatos();
+     CargarPlatosC();
       $("#C-add").on("click",()=>{addCategoriaN();});
     },300);
 }
@@ -11,16 +11,16 @@ function viewCategorias(){
     $('#A-Contenido').load("com/Admin/principal/lista-categ.html");
 }
 
-function CargarPlatos(){
+function CargarPlatosC(){
  $.ajax({type:"GET", url:"api/admin/plato",contentType:"application/json"})
-      .then((Platos)=>{listP(Platos);},
+      .then((Platos)=>{listPC(Platos);},
              (error)=>{errorMessage(error.status,$("#ErrorDiv"));});      
 }
-function listP(Platos){
+function listPC(Platos){
     var Tabl = $('#T-add-cat');
-    Platos.forEach( (p)=>{Rowplatos(Tabl,p);});
+    Platos.forEach((p)=>{RowplatosC(Tabl,p);});
 }
-function Rowplatos(Tabl,p){
+function RowplatosC(Tabl,p){
   var tr = $("<tr>");
   tr.html("<th scope='row'>"+    
  "<div class='custom-control custom-checkbox'>"+
