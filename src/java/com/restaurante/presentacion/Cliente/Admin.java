@@ -56,7 +56,19 @@ public class Admin {
         }  
     }
     
-
+   
+    @POST
+    @Path("/categoriaEdit")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void Editcategoria(Categoria categoria) {
+       try {
+            Model.instance().editCategoria(categoria); 
+        } catch (Exception ex) {
+            throw new NotFoundException();
+        }  
+    }
+    
+    
     @POST
     @Path("/adicional")
     @Consumes(MediaType.APPLICATION_JSON)

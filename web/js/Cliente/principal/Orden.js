@@ -156,7 +156,6 @@ function EliminarPdeLista(i,op){
 
 
  function CargarDatosAOrden(){
- 
   var orden = $.parseJSON(sessionStorage.getItem('orden')); 
   var Cliente = $.parseJSON(sessionStorage.getItem('cliente'));
   pop(Cliente,orden);
@@ -216,8 +215,9 @@ function optionAdd(select,d){
  function RealizarYGuargarOrden(){
       $.ajax({type: "POST", url:"api/realizar",
                 data: sessionStorage.getItem('orden'),contentType: "application/json"})
-      .then((error)=>{ alert(errorMessage(error.status));});
-       Realizada();      
+      .then(()=>{Realizada();},
+      (error)=>{ alert(errorMessage(error.status));});
+           
  }
  
  function Realizada(){

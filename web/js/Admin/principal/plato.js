@@ -12,7 +12,6 @@ function() {
 }
 function viewPlatos(){
     $('#A-Contenido').load("com/Admin/principal/lista-platos.html");
-
     cargaPlatos();
 }
 function CargarAdicionales(){
@@ -115,7 +114,7 @@ function rowPlatos(Tabl,p){
       $.ajax({type:"POST", url:"api/admin/plato",
        data: JSON.stringify(Plato),contentType: "application/json"})
    .then( ()=>{PlatoSuccessA();},
-     (error)=>{ errorMessage(error.status,$("#ErrorDiv"));}); 
+     (error)=>{errorMessage(error.status,$("#ErrorDiv"));}); 
   }
   
   function PlatoSuccessA(){

@@ -65,7 +65,7 @@ public class Login {
             Model.instance().addPersona(cliente);
             logged=Model.instance().get(cliente);
             HttpSession session = request.getSession(true);
-            session.setAttribute("persona",logged);
+            session.setAttribute("usuario",logged);
             return Personalimpia(logged);
         } catch (Exception ex) {
             throw new NotFoundException();

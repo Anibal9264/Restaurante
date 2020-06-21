@@ -9,7 +9,7 @@ $('#view-Adicionales').on("click",()=>{viewAdicionales();});
 $('#addAdicional').on("click",()=>{viewNAdicional();});
 $('#view-Adicional').on("click",()=>{viewAdicional();});
 $('#view-Ordenes').on("click",()=>{Ordenesshow();});
-$('#addP').on("click",()=>{registroShow();});//anadir persona
+$('#addP').on("click",()=>{registroShow();});
 $('#log').on("click",()=>{LogoutAd();});
  CargarDatosdelAdmin();
 }

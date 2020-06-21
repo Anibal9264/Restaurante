@@ -1,6 +1,6 @@
 function Ordenesshow(){
     $("#A-Contenido").load("com/Admin/principal/lista-ordenes.html");
-    $("#MostrarOrden").load("com/Admin/principal/OrdenDetalles.html");
+    $("#MostrarModal").load("com/Admin/principal/OrdenDetalles.html");
     setTimeout(
      function() 
      {ObtenerOrdenes();},500);
@@ -44,7 +44,7 @@ function MostrarDetallado(O,n){
    $("#D_total").val("₡"+O.total);
    $("#Cambiar").off("click");
    $("#Cambiar").on("click",()=>{cambiarestado(O,n);});
-   $("#MostrarOrden").modal("show");
+   $("#MostrarModal").modal("show");
 }
 
 function CargarEstado(estado){

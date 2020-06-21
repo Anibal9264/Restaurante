@@ -11,7 +11,7 @@ window.existeP;
 
 function CargarDatosCliente(){
      var cliente = $.parseJSON(sessionStorage.getItem('cliente'));
-     var nom=$("#nomb");
+     var nom=$("#Login");
      nom.html(cliente.nombre+" "+cliente.apellidos);
      $('#Logout').removeClass("hide");
      $('#histo').removeClass("hide");
@@ -59,10 +59,9 @@ function existe(){
    };
     $.ajax({type:"POST", url:"api/login/get",
                 data: JSON.stringify(persona),contentType: "application/json"})
-      .then((persona)=>{if(persona){existeP = persona;
+      .then((persona)=>{if(persona){existeP = true;
            $("#R_email").removeClass("is-valid");
            $("#R_email").addClass("is-invalid");  
-           $("#R_email").val("");
            $("#R_email").attr("placeholder",persona.correo); 
         }});  
 }
@@ -80,7 +79,8 @@ function  AddUser(){
       persona.apellidos.length === 0 ||
       persona.telefono.length === 0 ||
       persona.correo.length === 0 ||
-      persona.contraseña.length === 0
+      persona.contraseña.length === 0||
+      existeP
       ){
       alert("No puede haber campos vacios");
     } else {
