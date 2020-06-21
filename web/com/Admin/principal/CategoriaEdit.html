@@ -1,0 +1,41 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <section class="container">
+            <h1 class="h2 text-center my-3"></h1>
+            <fieldset>
+                <legend class="h4 text-center">
+                    Agregar Categoría
+                </legend>
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" id="C-nombre" name="categoria" class="form-control" placeholder="Desayunos" required>
+                </div>
+                <div class="form-group">
+                    <label>Seleccione los platos de esta categoria</label>
+                </div>
+                <ul class="list-group scrollbar scrollbar-primary"  >
+                    <div class="scrollbar-cyan bordered-cyan">
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Plato</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="T-add-cat">
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </ul>
+                <br>
+                <div class="form-group text-center">
+                    <button type="submit" id="C-add" class="btn btn-primary "> Agregar</button>
+                </div>
+            </fieldset>
+        </section>
+    </div>
+</div>

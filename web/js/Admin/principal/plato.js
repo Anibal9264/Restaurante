@@ -1,4 +1,4 @@
-/* global result*/
+ /* global result*/
 
 function viewNPlato(){
 $('#A-Contenido').load("com/Admin/principal/new-plato.html");
@@ -12,7 +12,6 @@ function() {
 }
 function viewPlatos(){
     $('#A-Contenido').load("com/Admin/principal/lista-platos.html");
-
     cargaPlatos();
 }
 function CargarAdicionales(){
@@ -66,9 +65,10 @@ function listarPlatos(Platos){
 }
 function rowPlatos(Tabl,p){
   var tr = $("<tr>");
-  //var tr2 = $("<tr>");
   tr.html(
- "<td>"+p.nombre+"</td>" + "<td>"+p.detalle+"</td>"+"<td>"+p.precio+"</td>"+
+ "<td>"+p.nombre+"</td>" + 
+ "<td>"+p.detalle+"</td>"+
+ "<td>"+p.precio+"</td>"+
  "<td>"+p.disponibles+"</td>"
  );
   Tabl.append(tr);                                                                                                                        
@@ -114,7 +114,7 @@ function rowPlatos(Tabl,p){
       $.ajax({type:"POST", url:"api/admin/plato",
        data: JSON.stringify(Plato),contentType: "application/json"})
    .then( ()=>{PlatoSuccessA();},
-     (error)=>{ errorMessage(error.status,$("#ErrorDiv"));}); 
+     (error)=>{errorMessage(error.status,$("#ErrorDiv"));}); 
   }
   
   function PlatoSuccessA(){

@@ -99,10 +99,7 @@ public class Dao {
         String sql="insert into restaurante.Plato_Adicionales (Plato,Adicionales)"
          + " values('%s','%s')";
         sql=String.format(sql,plato,ad);
-        int count=db.executeUpdate(sql);
-        if (count==0){
-            throw new Exception("Error");
-        }
+        db.executeUpdate(sql);
  }
         
     public void CategoriaAdd(Categoria c) throws Exception{
@@ -130,9 +127,6 @@ public class Dao {
          + " values('%s','%s')";
         sql=String.format(sql,cat,plato);
         int count=db.executeUpdate(sql);
-        if (count==0){
-            throw new Exception("Error");
-        }
  }
 
     
@@ -686,7 +680,19 @@ public class Dao {
     }
 
    
-
-   
+  public void CategoriaEddit(Categoria categoria) throws Exception {
+      String sql="update restaurante.categoria set nombre='%s' where id='%s'";
+        sql=String.format(sql,categoria.getNombre(),categoria.getId());
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception(" NO UPDATE");
+        }
+        sql="DELETE FROM restaurante.categoria_plato WHERE Categoria = '%s'";
+        sql=String.format(sql,categoria.getId());
+        db.executeUpdate(sql);
+        for(Plato p:categoria.getPlatos()){
+        Categoria_plato(categoria.getId(),p.getId());
+        }
+    }
      
 }

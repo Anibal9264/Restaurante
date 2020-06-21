@@ -1,9 +1,9 @@
+window.existeP; 
 
  function loaded(){
   $("#loginAd").on("click",()=>{LoginA();}); 
-    $("#Bregistro").on("click",()=>{registroShow();});
+  $("#Bregistro").on("click",()=>{registroShow();});
   $("#register").on("click",()=>{AddUserAd();});
-  //existeP = null;
  } 
 $(loaded);
 
@@ -29,11 +29,11 @@ function CargarA(persona){
 }
 
 function LogoutAd(){
-   
    $.ajax({type: "DELETE",url:"api/login" })
    .then( ()=>{logoutSuccessA();},
    (error)=>{ errorMessage(error.status,$("#loginErrorDiv"));}); 
 }
+
 function logoutSuccessA(){ 
   sessionStorage.removeItem('Admin');
   window.location.href = "login.html";
@@ -66,6 +66,7 @@ function() {
     $('#modalRegistro').modal("show");
     $("#R_email").on("change",()=>{Verificar();});
     $("#R_email").on("keyup",()=>{Verificar();});
+    $("#R_register").on("click",()=>{AddUserAd();});
 },500);
 
 }
@@ -85,10 +86,9 @@ function Existe(){
    };
     $.ajax({type:"POST", url:"api/login/get",
                 data: JSON.stringify(persona),contentType: "application/json"})
-      .then((persona)=>{if(persona){existeP = persona;
+      .then((persona)=>{if(persona){existeP = true;
            $("#R_email").removeClass("is-valid");
            $("#R_email").addClass("is-invalid");  
-           $("#R_email").val("");
            $("#R_email").attr("placeholder",persona.correo); 
         }});  
 }
@@ -100,26 +100,37 @@ function  AddUserAd(){
           apellidos:$("#R_apellidos").val(),
           telefono:$("#R_telefono").val(),
           correo:$("#R_email").val(),
-          contraseña:$("#R_contra").val()
+          contraseña:$("#R_contra").val(),
+          isAdmin:true
        };
       if (persona.nombre.length === 0 ||
       persona.apellidos.length === 0 ||
       persona.telefono.length === 0 ||
       persona.correo.length === 0 ||
-      persona.contraseña.length === 0
+      persona.contraseña.length === 0||
+      existeP
       ){
       alert("No puede haber campos vacios");
     } else {
       $.ajax({type:"POST", url:"api/login/add",
        data: JSON.stringify(persona),contentType: "application/json"})
-      .then((persona)=>{persona.correo="";CargarA(persona);},
-      (error)=>{errorMessage(error.status,$("#loginErrorDiv"));});
-     }
-      
-       
-        
+      .then(()=>{registroShow();SuccessAddAd();},
+      (error)=>{errorMessage(error.status,$("#ErrorDiv"));});
+     }     
 }
 
+  
+  function SuccessAddAd(){
+      $("#addExito").modal("show");
+     setTimeout(
+     function() 
+     {
+      viewGrafica();
+       $("#addExito").modal("hide");
+     }, 1000); 
+  }
 
+
+// ---------------------registrar------------------------
 
 

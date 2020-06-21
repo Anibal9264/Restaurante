@@ -118,7 +118,9 @@ public class Model {
       return base.PlatosMasvendidos();
     }
   
-    
+    public void editCategoria(Categoria categoria) throws Exception {
+     base.CategoriaEddit(categoria);
+    }
   
     
 }

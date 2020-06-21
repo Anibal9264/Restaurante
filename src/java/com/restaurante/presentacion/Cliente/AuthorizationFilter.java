@@ -28,8 +28,10 @@ public class AuthorizationFilter implements Filter {
         protectedResources.put("POST /Restaurante/api/direccion/", "ADM-CLI");
         
         //pagina Admin---
+        protectedResources.put("POST /Restaurante/api/admin/orden/", "ADM");
         protectedResources.put("POST /Restaurante/api/admin/plato/", "ADM");
         protectedResources.put("POST /Restaurante/api/admin/categoria/", "ADM");
+        protectedResources.put("POST /Restaurante/api/admin/categoriaEdit/", "ADM");
         protectedResources.put("POST /Restaurante/api/admin/adicional/", "ADM");
         protectedResources.put("POST /Restaurante/api/admin/adicionales/", "ADM");
         
@@ -37,6 +39,8 @@ public class AuthorizationFilter implements Filter {
         protectedResources.put("GET /Restaurante/api/admin/adicional/", "ADM");
         protectedResources.put("GET /Restaurante/api/admin/adicionales/", "ADM");
         protectedResources.put("GET /Restaurante/api/admin/ordenes/", "ADM");
+        protectedResources.put("GET /Restaurante/api/admin/ordenesP/", "ADM");
+        protectedResources.put("GET /Restaurante/api/admin/ordenesPMas/", "ADM");
         protectedResources.put("GET /Restaurante/api/admin/ordenesDia/", "ADM");
         protectedResources.put("GET /Restaurante/api/admin/ordenesMes/", "ADM");
         protectedResources.put("GET /Restaurante/api/admin/ordenesAño/", "ADM");
