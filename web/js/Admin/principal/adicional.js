@@ -8,7 +8,31 @@ function() {
 
 function viewAdicional(){
     $('#A-Contenido').load("com/Admin/principal/lista-adicional.html");
+    cargarAdicional();
 }
+
+
+///////////////////////////////////////
+
+function cargarAdicional(){
+ $.ajax({type:"GET", url:"api/admin/adicional",contentType:"application/json"})
+      .then((AdicionalL)=>{listarAdicional(AdicionalL);},
+             (error)=>{ errorMessage(error.status,$("#ErrorDiv"));});      
+}
+function listarAdicional(AdicionalL){
+    var Tabl = $('#listaAdicional');
+    AdicionalL.forEach( (a)=>{rowAdicion(Tabl,a);});
+}
+
+ function rowAdicion(Tabl,ad){
+  var tr = $("<tr>");
+  tr.html(
+ "<td>"+ad.id+"</td>" + "<td>"+ad.detalle+"</td>"+"<td>"
+ +ad.precio+"</td>"
+ );
+  Tabl.append(tr);    
+ }
+//////////////////////////////////////
 
   function addAdicionalN(){
       Adicional={

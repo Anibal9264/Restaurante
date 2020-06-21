@@ -9,9 +9,41 @@ function() {
 
 function viewAdicionales(){
     $('#A-Contenido').load("com/Admin/principal/lista-adicionales.html");
+     cargaAdicionales();
+
 }
 
+//////////////////////////////
 
+
+function cargaAdicionales(){
+ $.ajax({type:"GET", url:"api/admin/adicionales",contentType:"application/json"})
+      .then((Adicionales)=>{listAdi(Adicionales);},
+             (error)=>{ errorMessage(error.status,$("#ErrorDiv"));});      
+}
+function listAdi(Adicionales){
+    
+    var Tabl = $('#listaAdicionales');
+    Adicionales.forEach((a)=>{rowAdicionales(Tabl,a);});
+}
+function rowAdicionales(Tabl,a){
+  var tr = $("<tr>");
+  var td = $("<td>");
+  a.listAdicionales.forEach((ad)=>{rowAdicional(td,ad);});
+  tr.html("<td>"+a.id+"</td>"+"<td>"+a.nombre+"</td>"+
+ "<td>"+renderTipo(a.tipo)+"</td>"+"<td>"+a.plato+"</td>");
+  tr.append(td);
+  Tabl.append(tr);                                                                                                                        
+}
+
+ function rowAdicional(td,ad){
+     var span = $("<span>");
+     span.addClass("label  row");
+     span.html(" "+ad.detalle);
+     td.append(span);    
+ }
+ 
+////////////////////////////////
 function CargarAdicionalL(){
  $.ajax({type:"GET", url:"api/admin/adicional",contentType:"application/json"})
       .then((AdicionalL)=>{listA(AdicionalL);},
