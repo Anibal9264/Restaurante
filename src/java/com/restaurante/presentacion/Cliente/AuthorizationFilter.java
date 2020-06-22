@@ -44,7 +44,9 @@ public class AuthorizationFilter implements Filter {
         protectedResources.put("GET /Restaurante/api/admin/ordenesDia/", "ADM");
         protectedResources.put("GET /Restaurante/api/admin/ordenesMes/", "ADM");
         protectedResources.put("GET /Restaurante/api/admin/ordenesAño/", "ADM");
-        protectedResources.put("GET /Restaurante/index2.html", "ADM");    
+        protectedResources.put("GET /Restaurante/index2.html", "ADM"); 
+        protectedResources.put("GET http://localhost:8080/Restaurante/index2.html", "ADM"); 
+        
     }
     public void doFilter(ServletRequest request, ServletResponse response,FilterChain chain) throws IOException, ServletException {
         try {

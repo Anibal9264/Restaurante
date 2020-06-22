@@ -19,12 +19,12 @@ public class Direcciones {
   @Context
     HttpServletRequest request;
   
-  @POST
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces({MediaType.APPLICATION_JSON})    
     public Persona add(Direccion d) {
         HttpSession session = request.getSession(true);
-        Persona p = (Persona) session.getAttribute("persona");
+        Persona p = (Persona) session.getAttribute("usuario");
         try {
             d.setPersona_correo(p.getCorreo());
             Model.instance().addDireccion(d);

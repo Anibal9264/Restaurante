@@ -192,17 +192,11 @@ function optionAdd(select,d){
 }
 
  function addDireccion(){
-   var select;
-   $("#boton").click(function () {	 
-       select = $('input:radio[name=options]:checked').val();
-    });
-		
-   Direccion={
+Direccion={
        provincia:$("#provincia").val(),
        canton:$("#canton").val(),
        distrito:$("#distrito").val(),
-       exacta:$("#exacta").val(),
-       formaPago:select
+       exacta:$("#exacta").val()  
    };
    $.ajax({type: "POST", url:"api/direccion",
       data: JSON.stringify(Direccion),contentType: "application/json"})
@@ -229,7 +223,7 @@ function optionAdd(select,d){
      function() 
      {
       $("#comparRealizada").modal("hide");
-     }, 2000);
+     }, 1000);
  }
  
  function OrdenRender(){

@@ -1,6 +1,6 @@
 function viewGrafica(){
    $('#A-Contenido').load("com/Admin/principal/estadistica.html");
-   $("#MostrarOrden").load("com/Admin/principal/OrdenDetalles.html");
+   $("#MostrarModal").load("com/Admin/principal/OrdenDetalles.html");
     setTimeout(
 function() { 
       cargargraficas();
